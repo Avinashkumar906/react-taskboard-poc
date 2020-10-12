@@ -8,7 +8,7 @@ function Article(props) {
 
     useEffect(() => {
         const initTaskBoard = ()=>{        
-            axios.get('http://localhost:8080/taskBoard')
+            axios.get('https://api4asquare.herokuapp.com/taskBoard')
             .then(
                 (response)=>setArticle(response.data)
             )
@@ -24,7 +24,8 @@ function Article(props) {
     return (
         <div id="main">
             <section id="one" className="tiles">
-                {article.map((item)=>{
+                {
+                article.map((item)=>{
                     let articleTemp = 
                         (<article>
                             <span className="image">
@@ -36,7 +37,17 @@ function Article(props) {
                             </header>
                         </article>);
                     return articleTemp;
-                })}
+                })
+                }
+                <article>
+                    <span className="image">
+                        <img src="images/pic01.jpg" alt="" />
+                    </span>
+                    <header className="major">
+                        <h3 className="text-white">Add</h3>
+                        <p className="text-white">Add a board!</p>
+                    </header>
+                </article>
             </section>
         </div>
     )
