@@ -1,0 +1,203 @@
+@import url(../node_modules/bootstrap/dist/css/bootstrap.min.css);
+
+$color-bg1 : #2e1114;
+$color-bg2 : #501b1d;
+$color-nt: #64485c;
+$color-fg1: #83677b;
+$color-fg2: #adadad;
+// $color-light : #efefef;
+$color-light: whitesmoke;
+$text-dark: #000;
+$text-light: #fff;
+
+@function text-color($color) {
+  @if (lightness($color) > 50) {
+    @return $text-dark;
+  }
+
+  @else {
+    @return $text-light;
+  }
+}
+
+@function btn-color($color) {
+  @if (lightness($color) > 50) {
+    @return darken($color, 25%);
+  }
+
+  @else {
+    @return lighten($color, 25%);
+  }
+}
+
+body {
+  background-color: $color-fg2;
+}
+
+.b-none {
+  border: none !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.bg-blur {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  filter: blur(2px);
+}
+
+.closeModal {
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: 36px;
+  padding: 10px;
+  line-height: 1;
+  margin-left: auto;
+  display: block;
+  color: inherit;
+}
+
+.navbar {
+  background-color: $color-bg1 !important;
+  // box-shadow: 1px 1px 5px 5px rgba($color: $color-light, $alpha: .10);
+
+  .brandName {
+    background-color: $color-fg2 !important;
+    color: text-color($color-fg2);
+    text-transform: capitalize;
+    font-size: 16px;
+    padding: 5px 10px;
+    font-weight: 900;
+    font-family: auto;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .navBar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    opacity: 0;
+    padding: 0 16px;
+    bottom: 0;
+    visibility: hidden;
+    background-color: $color-bg1;
+    color: text-color($color-bg1);
+    transition: opacity .3s ease-in, visibility .3s ease-in;
+    backdrop-filter: blur(5px);
+
+    .nav-item {
+      font-size: 20px;
+      padding: 16px;
+      padding-bottom: 8px;
+      color: inherit;
+      text-align: center;
+      border-bottom: 2px solid transparent;
+      transition: border .3s ease-in;
+      text-transform: uppercase;
+
+      &:hover {
+        border-bottom: 2px solid text-color($color-bg1);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    ul.navbar-nav {
+      display: flex;
+      justify-self: center;
+      align-items: center;
+      align-self: center;
+      justify-content: center;
+      height: 100%;
+      flex-grow: 1;
+      min-width: 350px;
+    }
+
+    &.show {
+      visibility: visible;
+      opacity: .98;
+      backdrop-filter: blur(5px);
+    }
+  }
+
+  .navbar-toggler {
+    box-shadow: none;
+    color: whitesmoke;
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+    }
+  }
+}
+
+// Login Component
+.login-container {
+  background: $color-bg2;
+  color: text-color($color-bg2);
+  max-width: 480px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 30px 20px;
+
+  .form-control {
+    border-radius: 3px;
+    outline: none;
+    background-color: text-color($color-bg1);
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.btn {
+  outline: none;
+  border: none;
+  border-radius: 3px;
+
+  &:focus,
+  &:hover {
+    opacity: .8;
+    box-shadow: none;
+  }
+}
+
+.btn-primary {
+  color: text-color($color-bg1);
+  background-color: btn-color($color-bg1);
+
+  &:focus,
+  &:hover {
+    color: text-color($color-bg1);
+    background-color: btn-color($color-bg1);
+  }
+}
+
+.btn-secondary {
+  color: text-color($color-nt);
+  background-color: btn-color($color-nt);
+
+  &:focus,
+  &:hover {
+    color: text-color($color-nt);
+    background-color: btn-color($color-nt);
+  }
+}
