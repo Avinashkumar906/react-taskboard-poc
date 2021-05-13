@@ -1,4 +1,10 @@
 @import url(../node_modules/bootstrap/dist/css/bootstrap.min.css);
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+// font-family: 'Itim',
+// cursive;
+// font-family: 'Noto Sans KR',
+// sans-serif;
 
 $color-bg1 : #2e1114;
 $color-bg2 : #501b1d;
@@ -31,7 +37,9 @@ $text-light: #fff;
 }
 
 body {
-  background-color: $color-fg2;
+  // background-color: text-color();
+  font-family: 'Itim', cursive;
+  letter-spacing: 1px;
 }
 
 .b-none {
@@ -76,7 +84,7 @@ a {
     font-size: 16px;
     padding: 5px 10px;
     font-weight: 900;
-    font-family: auto;
+    // font-family: auto;
     letter-spacing: 1px;
     border-radius: 2px;
     text-decoration: none;
@@ -160,7 +168,12 @@ a {
   .form-control {
     border-radius: 3px;
     outline: none;
+    border-color: lighten($color-bg1, 20%);
     background-color: text-color($color-bg1);
+
+    &::placeholder {
+      color: lighten($color-bg1, 20%);
+    }
 
     &:focus {
       box-shadow: none;
@@ -184,10 +197,16 @@ a {
   color: text-color($color-bg1);
   background-color: btn-color($color-bg1);
 
+  &:disabled,
   &:focus,
   &:hover {
     color: text-color($color-bg1);
     background-color: btn-color($color-bg1);
+  }
+
+  &:disabled {
+    pointer-events: visible;
+    cursor: not-allowed;
   }
 }
 
@@ -195,9 +214,15 @@ a {
   color: text-color($color-nt);
   background-color: btn-color($color-nt);
 
+  &:disabled,
   &:focus,
   &:hover {
     color: text-color($color-nt);
     background-color: btn-color($color-nt);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: visible;
   }
 }
