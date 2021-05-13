@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const axiosConfig = {
-  baseURL: 'http://localhost:8080/',
+  baseURL: process.env.REACT_APP_BASE_API,
   timeout: 30000,
 };
 

@@ -9,11 +9,12 @@ import Header from './components/navBar/navbar';
 
 
 function App() {
+  console.log(process.env.REACT_APP_BASE_API);
   return (
     <Router>
       <Container fluid className="p-0 d-flex flex-column">
         <Header></Header>
-        <Container className="flex-grow-1">
+        <Container fluid className="flex-grow-1 flex-column h-100 p-0">
           <Route path="/" exact render={()=><h1>Home</h1>}></Route>
           <Route path="/login" component={Login}></Route>
           <Route path="/taskboard" component={Taskboard}></Route>

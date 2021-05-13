@@ -3,22 +3,21 @@ import { Col, Card, CardTitle, CardText, CardBody, CardFooter, CardHeader } from
 
 function Board(props) {
   return (
-    <Col md='4' sm='6' lg='3' className="my-2 board">
+    <Col className="board cursor-pointer" onClick={()=>props.clicked(props.data)}>
       <Card>
         <CardHeader>
           {props.data.title}
         </CardHeader>
         <CardBody>
           <CardText>{props.data.description}</CardText>
+          {/* <CardText>{JSON.stringify(props.data)}</CardText> */}
           <small>
-            TaskCount: {props.data.tasks.length}
+            By: {props.data.author}<br/>
+            Date: {(new Date(props.data.date)).toDateString()}
           </small>
         </CardBody>
-        <CardFooter>
-          <small>
-            {props.data.author}
-          </small>
-        </CardFooter>
+        {/* <CardFooter> */}
+        {/* </CardFooter> */}
       </Card>
     </Col>
   )

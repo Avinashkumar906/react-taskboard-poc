@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Container, Button, Row, Col } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
+import {Link} from 'react-router-dom'
 
 import { fetchTasksboardAsync } from '../../store/action/action';
 import Board from './board/board'
@@ -11,15 +12,28 @@ const Taskboard = (props) => {
     props.fetchTaskboard()
   }
 
+  const clickTaskHandler = (item) =>{
+    console.log(item)
+  }
+
   return (
-    <Container fluid className="taskBoard">
-      <Row>
-        <Col className="col-12 my-2">
-          <Button color="primary" onClick={fetchTaskboardHandler}>fetch Taskboard</Button>
+    // <Container fluid className="taskBoard p-0">
+    <div>
+      <Row className="m-0 w-100">
+        <Button color="primary" className="border-radius-0" onClick={fetchTaskboardHandler}>fetch Taskboard</Button>
+        <Col sm="6" md="4" lg="3" color="secondary" className="bg-light p-0 taskListContainer">
+          {props.tasksboard.map((item) => <Board clicked={clickTaskHandler} key={item._id} data={item}></Board>)}
         </Col>
-        {props.tasksboard.map((item) => <Board key={item._id} data={item}></Board>)}
+        <Col sm="6" md="8" lg="9" color="secondary" className="bg-light h-100 taskListContainer">
+         
+        </Col>
       </Row>
-    </Container>
+    </div>
+      // {/* <Row>
+      //   <Col className="col-12 my-2">
+      //   </Col>
+      // </Row> */}
+    // </Container>
   )
 }
 
