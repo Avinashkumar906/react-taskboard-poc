@@ -1,25 +1,24 @@
 import React from 'react'
 import { Col, Card, CardTitle, CardText, CardBody, CardFooter, CardHeader } from 'reactstrap';
+import { RiCalendar2Line, RiUser3Line } from 'react-icons/ri';
 
 function Board(props) {
   return (
-    <Col className="board cursor-pointer" onClick={()=>props.clicked(props.data)}>
-      <Card>
+      <Card color="" className="board cursor-pointer" onClick={()=>props.clicked(props.data)}>
         <CardHeader>
-          {props.data.title}
+          <span>{(new Date(props.data.created)).toDateString()}</span> 
+          <RiCalendar2Line />
         </CardHeader>
         <CardBody>
-          <CardText>{props.data.description}</CardText>
-          {/* <CardText>{JSON.stringify(props.data)}</CardText> */}
-          <small>
-            By: {props.data.author}<br/>
-            Date: {(new Date(props.data.date)).toDateString()}
-          </small>
+          <CardText>
+            {props.data.title}
+          </CardText>
+          <div className="card-body-info">
+            {props.data.description}
+            {/* <span>{props.data.author} <RiUser3Line /> </span> */}
+          </div>
         </CardBody>
-        {/* <CardFooter> */}
-        {/* </CardFooter> */}
       </Card>
-    </Col>
   )
 }
 

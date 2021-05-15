@@ -62,7 +62,7 @@ const Login = (props) => {
             <Input id="password" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} name="password" type="password" placeholder="Password" />
             {formik.errors.password && formik.touched.password ? <small id="passwordHelp" className="form-text text-danger">{formik.errors.password}</small> : ''}
           </FormGroup>
-          <Button type="submit" color="primary" disabled={!(formik.dirty && formik.isValid)}>Sign In</Button>
+          <Button type="submit" color="ternary" disabled={!(formik.dirty && formik.isValid)}>Sign In</Button>
           <span className="mx-2"> Or </span> 
           <Button type="button" color="secondary">Click here for Sign Up!</Button>
         </Form>

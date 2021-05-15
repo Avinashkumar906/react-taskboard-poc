@@ -8,10 +8,17 @@ const axiosConfig = {
 const token = localStorage.getItem('token');
 const axios = Axios.create(axiosConfig);
 
-if(token) {
-  axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
-}
 
-// axios.interceptors.request
+axios.interceptors.request.use(req => {
+  console.log('Request intercepting for bearer!')
+  const accessToken = localStorage.getItem('token');
+  req.headers.Authorization = accessToken ? `Bearer ${accessToken}` : '';
+  return req;
+})
+
+axios.interceptors.response.use(res => {
+  console.log('Response intercepting!')
+  return res;
+})
 
 export default axios;
