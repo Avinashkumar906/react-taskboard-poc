@@ -11,11 +11,12 @@ function Board(props) {
         </CardHeader>
         <CardBody>
           <CardText>
-            {props.data.title}
+            <div className="h4">
+              {props.data.title}
+            </div>
           </CardText>
-          <div className="card-body-info">
+          <div className="card-body-info h6">
             {props.data.description}
-            {/* <span>{props.data.author} <RiUser3Line /> </span> */}
           </div>
         </CardBody>
       </Card>

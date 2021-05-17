@@ -6,6 +6,7 @@ import { Container } from 'reactstrap'
 import Login from './components/login/login';
 import Taskboard from './components/taskBoard/taskboard';
 import Header from './components/navBar/navbar';
+import Todos from "./components/toDos/toDos";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" exact render={()=><h1>Home</h1>}></Route>
           <Route path="/login" component={Login}></Route>
           <Route path="/taskboard" component={Taskboard}></Route>
+          <Route path="/todolist" component={Todos}></Route>
         </Container>
       </Container>
     </Router>
