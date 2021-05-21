@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col, ButtonGroup, Button } from 'reactstrap';
 import { AiFillThunderbolt,AiOutlineArrowDown } from "react-icons/ai";
-import { BiStar, BiEditAlt, BiTag, BiShare, BiCalendar, BiGridAlt, BiArrowFromBottom, BiArrowFromTop } from "react-icons/bi";
+import { BiStar, BiEditAlt, BiTag, BiShare, BiCalendar } from "react-icons/bi";
 
 function TodosCard() {
   return (

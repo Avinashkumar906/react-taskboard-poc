@@ -1,7 +1,7 @@
 const editorOption = {
   mode: "balloon",
   fontSize : [
-      8, 10, 14, 18, 24, 36
+      8, 10, 12, 14, 16, 18, 20, 24, 28, 36
   ],
   katex: "window.katex",
   tabDisable: false,

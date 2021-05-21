@@ -5,7 +5,7 @@ const axiosConfig = {
   timeout: 30000,
 };
 
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 const axios = Axios.create(axiosConfig);
 
 

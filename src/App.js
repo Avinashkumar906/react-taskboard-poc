@@ -3,10 +3,13 @@ import './App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'reactstrap'
 
-import Login from './components/login/login';
+import Login from './components/user/login/login';
 import Taskboard from './components/taskBoard/taskboard';
 import Header from './components/navBar/navbar';
 import Todos from "./components/toDos/toDos";
+import Home from './page/home';
+import Signup from './components/user/signup/signup';
+import Reset from './components/user/reset/reset'
 
 
 function App() {
@@ -18,8 +21,10 @@ function App() {
           <Header></Header>
         </Container>
         <Container fluid className="contentBody p-0">
-          <Route path="/" exact render={()=><h1>Home</h1>}></Route>
-          <Route path="/login" component={Login}></Route>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/signin" component={Login}></Route>
+          <Route path="/signup" component={Signup}></Route>
+          <Route path="/reset" component={Reset}></Route>
           <Route path="/taskboard" component={Taskboard}></Route>
           <Route path="/todolist" component={Todos}></Route>
         </Container>

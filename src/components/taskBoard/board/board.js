@@ -1,6 +1,6 @@
 import React from 'react'
-import { Col, Card, CardTitle, CardText, CardBody, CardFooter, CardHeader } from 'reactstrap';
-import { RiCalendar2Line, RiUser3Line } from 'react-icons/ri';
+import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
+import { RiCalendar2Line } from 'react-icons/ri';
 
 function Board(props) {
   return (

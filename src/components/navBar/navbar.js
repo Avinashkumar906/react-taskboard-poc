@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import { Container, Button, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
+import React, { useState } from 'react';
+import { Container, Button, Navbar, Nav, NavItem } from 'reactstrap';
 import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
 import { Link } from 'react-router-dom'
 
@@ -39,9 +39,9 @@ const Header = (props) => {
               <Link to="/contact" onClick={toggleNavbar}>Contact</Link>
             </NavItem>
             <NavItem className="b-none w-100">
-              <Link to="/login" onClick={toggleNavbar}>
+              <Link to="/signin" onClick={toggleNavbar}>
                 <Button size="lg" color="primary l-10" className="d-block m-auto w-100 text-uppercase">
-                  Login
+                  Sign In
                 </Button>
               </Link>
             </NavItem>
