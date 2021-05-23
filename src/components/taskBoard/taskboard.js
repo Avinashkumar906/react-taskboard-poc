@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux';
 import { Button, Row, Col, ButtonGroup, ListGroup, ListGroupItem } from 'reactstrap';
 // import {Link} from 'react-router-dom'
@@ -6,16 +6,25 @@ import SunEditor from 'suneditor-react';
 import { RiAddCircleFill, RiRefreshFill, RiEditCircleFill, RiSaveFill, RiDeleteBin2Line} from 'react-icons/ri';
 
 import editorConfig from './editor.config'
-import { fetchTasksboardAsync } from '../../store/action/action';
+import { fetchTasksboardAsync } from '../../store/action/asyncAction';
 import Board from './board/board'
 import axios from '../../http/axios';
 import WithModal from '../hoc/withModal';
 import BoardForm from './form/boardForm';
 
-const Taskboard = (props) => {
+const Notebook = (props) => {
 
   const editorRef = useRef(null);
   const [currentTask, setCurrentTask] = useState(null)
+
+  useEffect(() => {
+    if(!props.tasksboard.length){
+      props.fetchTaskboard()
+    }
+    return () => {
+      console.log('Notebook removed from view!')
+    }
+  }, [])
   
   const fetchTaskboardHandler = () => {
     props.fetchTaskboard()
@@ -41,18 +50,19 @@ const Taskboard = (props) => {
   }
 
   const deleteTaskboardHandler = () => {
-    console.log(currentTask)
-    axios.delete(`taskboard?taskboardId=${currentTask._id}`).then(
-      res=>console.log(res.data)
-    ).catch(
-      err=>console.log(err)
-    )
+    if(currentTask){
+      axios.delete(`taskboard?taskboardId=${currentTask._id}`).then(
+        res=>console.log(res.data)
+      ).catch(
+        err=>console.log(err)
+      )
+    }
   }
 
   return (
     <Row className="taskboard">
-      <Col sm="6" md="4" lg="3" color="secondary" className="p-0 taskListContainer">
-        <div className="text-end w-100 bg-light ">
+      <Col sm="6" md="4" lg="3" color="secondary" className="p-0 taskListContainer bg-light">
+        <div className="text-end w-100">
           <ButtonGroup className="w-auto mr-auto">
             <Button color="ternary" className="border-radius-0" onClick={props.toggle}>
               <RiAddCircleFill ></RiAddCircleFill>
@@ -101,6 +111,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const reduxComponent = connect(mapStateToProps, mapDispatchToProps)(Taskboard)
+const reduxComponent = connect(mapStateToProps, mapDispatchToProps)(Notebook)
 
 export default WithModal(reduxComponent, BoardForm);

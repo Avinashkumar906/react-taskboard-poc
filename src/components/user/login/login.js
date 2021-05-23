@@ -1,12 +1,14 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
-import { Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 import { useFormik } from 'formik';
 
-import { addUser, fetchTasksboardAsync } from '../../../store/action/action';
-import { connect } from 'react-redux'
+import { fetchTasksboardAsync } from '../../../store/action/asyncAction';
+import { addUser } from '../../../store/action/action';
+// import * as ACTIONCONST from '../../../store/action/actionConstant';
 import axios from '../../../http/axios';
-import { Link } from 'react-router-dom';
+
 
 const Login = (props) => {
   
@@ -48,8 +50,8 @@ const Login = (props) => {
     });
 
   return (
-    <Row className="h-100 m-0 justify-content-end align-items-center">
-      <Col md="6" lg="5" className="p-0">
+    // <Row className="h-100 m-0 justify-content-end align-items-center">
+    //   <Col md="6" lg="5" className="p-0">
         <div className="bg-ternary p-5 m-4 containerHome">
           {/* <Form onSubmit={(e)=>formik.dirty && formik.isValid ? formik.handleSubmit : e.preventDefault()}> */}
           <Form onSubmit={formik.handleSubmit}>
@@ -66,16 +68,16 @@ const Login = (props) => {
             </FormGroup>
             <Button type="submit" color="primary" disabled={!(formik.dirty && formik.isValid)}>Sign In</Button>
             <span className="mx-2"> Or </span> 
-            <Link to="/signup">
+            <Link to="signup">
               <Button type="button" color="secondary">New User</Button>
             </Link>
             <div className="mt-2">
-              <small>Forget password <Link to="/reset">click here!</Link></small>
+              <small>Forget password <Link to={`reset`}>click here!</Link></small>
             </div>
           </Form>
         </div>
-      </Col>
-    </Row>
+    //   </Col>
+    // </Row>
   )
 }
 

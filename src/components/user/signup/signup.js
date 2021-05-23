@@ -1,10 +1,12 @@
 import React from 'react'
 import { useFormik } from 'formik';
-import axios from '../../../http/axios';
-import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+import axios from '../../../http/axios';
+
 const Signup = (props) => {
+  
   const formik = useFormik({
     initialValues: {
       name:'',
@@ -43,8 +45,8 @@ const Signup = (props) => {
   });
 
   return (
-    <Row className="h-100 m-0 justify-content-end align-items-center">
-      <Col md="6" lg="5" className="p-0">
+    // <Row className="h-100 m-0 justify-content-end align-items-center">
+    //   <Col md="6" lg="5" className="p-0">
         <div className="bg-ternary p-5 m-4 containerHome">
           {/* <Form onSubmit={(e)=>formik.dirty && formik.isValid ? formik.handleSubmit : e.preventDefault()}> */}
           <Form onSubmit={formik.handleSubmit}>
@@ -66,16 +68,16 @@ const Signup = (props) => {
             </FormGroup>
             <Button type="submit" color="primary" disabled={!(formik.dirty && formik.isValid)}>Sign Up</Button>
             <span className="mx-2"> Or </span> 
-            <Link to="/signin">
+            <Link to="signin">
               <Button type="button" color="secondary">Already Registered</Button>
             </Link>
             <div className="mt-2">
-              <small>Forget password <Link to="/reset">click here!</Link></small>
+              <small>Forget password <Link to="reset">click here!</Link></small>
             </div>
           </Form>
         </div>
-      </Col>
-    </Row>
+    //   </Col>
+    // </Row>
   )
 }
 

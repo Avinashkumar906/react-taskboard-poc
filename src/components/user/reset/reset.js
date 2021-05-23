@@ -1,12 +1,12 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
-import { Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
+import { Link } from 'react-router-dom'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useFormik } from 'formik';
 
-import { addUser, fetchTasksboardAsync } from '../../../store/action/action';
+import { addUser } from '../../../store/action/action';
+import { fetchTasksboardAsync } from "../../../store/action/asyncAction";
 import { connect } from 'react-redux'
 import axios from '../../../http/axios';
-import { Link } from 'react-router-dom';
 
 const Reset = (props) => {
   
@@ -55,23 +55,23 @@ const Reset = (props) => {
       formik.values.subject = "Reset password token | Forty App";
       axios.post('resettoken', formik.values)
       .then(
-        data => console.log(data)
+        data => alert('Token sent on email!')
       )
       .catch(
-        err => console.log(err)
+        err => alert('User does not exist!')
       )
     } else {
-      console.log("Enter valid email for token!")
+      alert("Enter valid email for token!")
     }
   }
 
   return (
-    <Row className="h-100 m-0 justify-content-end align-items-center">
-      <Col md="6" lg="5" className="p-0">
+    // <Row className="h-100 m-0 justify-content-end align-items-center">
+    //   <Col md="6" lg="5" className="p-0">
         <div className="bg-ternary p-5 m-4 containerHome">
           {/* <Form onSubmit={(e)=>formik.dirty && formik.isValid ? formik.handleSubmit : e.preventDefault()}> */}
           <Form onSubmit={formik.handleSubmit}>
-            <div className="h2 mb-3 text-left">Sign In</div>
+            <div className="h2 mb-3 text-left">Reset Password</div>
             <FormGroup className="mb-2"> 
               <Label for="email">Email address</Label>
               <Input id="email" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} name="email" type="text" placeholder="Enter email" />
@@ -91,12 +91,12 @@ const Reset = (props) => {
             <span className="mx-2"> Or </span> 
             <Button type="submit" color="secondary" disabled={!(formik.dirty && formik.isValid)}>Reset</Button>
             <div className="mt-2">
-              <small>Already registered <Link to="/signin">click here!</Link></small>
+              <small>Already registered <Link to="signin">click here!</Link></small>
             </div>
           </Form>
         </div>
-      </Col>
-    </Row>
+    //   </Col>
+    // </Row>
   )
 }
 

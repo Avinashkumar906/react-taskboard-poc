@@ -1,32 +1,36 @@
-import React from 'react';
-import { Col, Row, Button, ButtonGroup, Card, CardHeader, CardBody } from "reactstrap";
+import React, { useEffect } from 'react';
+import { Col, Row, Button, ButtonGroup } from "reactstrap";
 import { RiRefreshFill, RiAddCircleFill } from "react-icons/ri";
 
-import TodosCard from "./todocard/todosCard";
 import TodoForm from './form/todoform';
 import withModal from '../hoc/withModal'
-import axios from '../../http/axios'
+import { fetchTodoAsync } from '../../store/action/asyncAction';
+import { connect } from 'react-redux';
+import TodoColumn from './column/todoColumn';
 
 const ToDos = (props) => {
 
   // const [task, setTask] = useState(null);
-  // console.log(props)
+  // console.log(props.todos)
 
-  const refreshHandler = () => {
-    axios.get('tasks')
-    .then(
-      res => console.log(res.data)
-    )
-    .catch(
-      err => console.log(err)
-    )
+  useEffect(() => {
+    if(true){
+      props.fetchTodoHandler();
+    }
+    return () => {
+      console.log('Todo cleanup required!')
+    }
+  }, [])
+
+  const filterHandler = (data, filterKey) => {
+    return data.filter((e) => e.progress === filterKey)
   }
   
   return (
     <Row className="toDos">
       <Col sm="12" className="header">
         <ButtonGroup className="justify-self-end"> 
-          <Button color="ternary" className="border-radius-0" onClick={refreshHandler}>
+          <Button color="ternary" className="border-radius-0" onClick={props.fetchTodoHandler}>
             <RiRefreshFill/>
           </Button>
           <Button color="ternary" className="border-radius-0" onClick={props.toggle}>
@@ -34,38 +38,23 @@ const ToDos = (props) => {
           </Button>
         </ButtonGroup>
       </Col>
-      <Col md="4" className="content">
-        <Card className="h-100 headerFixCard">
-          <CardHeader className="justify-content-center fixHeaderTop">
-            <span className="text-uppercase h5 m-0">Backlog</span>
-          </CardHeader>
-          <CardBody className="overflowY">
-          </CardBody>
-        </Card>
-      </Col>
-      <Col md="4" className="content">
-        <Card className="h-100 headerFixCard">
-          <CardHeader className="justify-content-center fixHeaderTop">
-            <span className="text-uppercase h5 m-0">Progress</span>
-          </CardHeader>
-          <CardBody className="overflowY">
-            <TodosCard></TodosCard>
-          </CardBody>
-        </Card>
-      </Col>
-      <Col md="4" className="content">
-        <Card className="h-100 headerFixCard">
-          <CardHeader className="justify-content-center fixHeaderTop">
-            <span className="text-uppercase h5 m-0">Completed</span>
-          </CardHeader>
-          <CardBody className="overflowY">
-          </CardBody>
-        </Card>
-      </Col>
+      <TodoColumn title="Backlog" cards={filterHandler(props.todos, "BACKLOG")} />
+      <TodoColumn title="Progress" cards={filterHandler(props.todos, "PROGRESS")} />
+      <TodoColumn title="Completed" cards={filterHandler(props.todos, "COMPLETED")} />
     </Row>
   )
 }
 
-const modalWrapper = withModal(ToDos, TodoForm) 
+const mapStateToProps = ({todos}) => {
+  return {todos}
+}
 
-export default modalWrapper;
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTodoHandler: () => dispatch(fetchTodoAsync())
+  }
+}
+
+const ToDoComponent =  connect(mapStateToProps, mapDispatchToProps)(ToDos);
+
+export default withModal(ToDoComponent, TodoForm);

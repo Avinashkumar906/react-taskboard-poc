@@ -129,11 +129,11 @@ a {
 }
 
 .contentHeader {
-  height: 44px;
+  height: 52px;
 }
 
 .contentBody {
-  height: calc(100% - 44px);
+  height: calc(100% - 52px);
   max-height: 100%;
   // overflow-y: auto;
   // overflow-x: hidden;
@@ -500,6 +500,51 @@ a {
     @media screen and (min-width: 768px) {
       height: calc(100% - 36px);
     }
+  }
+
+}
+
+.gridDashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 16px;
+  margin: 16px 0;
+
+  .gridItem {
+    padding: 16px;
+  }
+
+  .item1 {
+    // grid-column: auto/ auto;
+    // grid-row: auto/ auto;
+  }
+
+  .item2 {
+    grid-column: span 2;
+    justify-self: stretch;
+    align-self: stretch;
+  }
+
+  .item3 {
+    grid-row: span 2;
+    justify-self: stretch;
+    align-self: stretch;
+  }
+
+  .item4 {
+    grid-row: span 2;
+  }
+
+  .item5 {
+    // grid-column: 1/ span 1;
+    // grid-row: 2/ span 2;
+  }
+
+  .item8 {
+    grid-column: span 2;
+    // grid-column: 3/ span 2;
+    // grid-row: 3/ span 1;
   }
 
 }

@@ -3,7 +3,8 @@ import { Card, Row, Col, ButtonGroup, Button } from 'reactstrap';
 import { AiFillThunderbolt,AiOutlineArrowDown } from "react-icons/ai";
 import { BiStar, BiEditAlt, BiTag, BiShare, BiCalendar } from "react-icons/bi";
 
-function TodosCard() {
+function TodosCard({data}) {
+  // console.log(data)
   return (
     <Card className="mb-2">
       <Row className="m-0">
@@ -24,8 +25,8 @@ function TodosCard() {
           </ButtonGroup>
         </Col>
         <Col sm="12 my-2">
-          <div className="h4 mb-1">Friendly painter</div>
-          <div className="h5 mb-1">within a design we  aroom in the fresh design</div>
+          <div className="h4 mb-1">{data.title}</div>
+          <div className="h5 mb-1">{data.description}</div>
         </Col>
         <Col sm="12">
           <div className="d-flex flex-row justify-content-between align-items-center flex-wrap">
@@ -40,7 +41,7 @@ function TodosCard() {
         </Col>
         <Col sm="12">
           <div className="h6">
-            <BiCalendar className="m-1 ml-0"></BiCalendar>Date: 12 june 2021.
+            <BiCalendar className="m-1 ml-0"></BiCalendar>{data.startDate}
           </div>
         </Col>
       </Row>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import { RiCalendar2Line } from 'react-icons/ri';
 
 function Board(props) {
@@ -10,11 +10,11 @@ function Board(props) {
           <RiCalendar2Line />
         </CardHeader>
         <CardBody>
-          <CardText>
+          {/* <CardText> */}
             <div className="h4">
               {props.data.title}
             </div>
-          </CardText>
+          {/* </CardText> */}
           <div className="card-body-info h6">
             {props.data.description}
           </div>

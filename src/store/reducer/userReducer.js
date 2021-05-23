@@ -1,14 +1,18 @@
-import { ADD_USER, REMOVE_USER } from '../action/action'
+import * as ACTIONCONST from '../action/actionConstant';
 
-const reducer = (state = {'name':'Sandy'}, action) =>{
+const Default = {
+  name:'Sandy',
+  email:'sandy@gmail.com'
+}
+
+const reducer = (state = Default, action) =>{
   // console.log("User reducer in action.")
   switch (action.type) {
-    case ADD_USER:
-      console.log("User Added to Store", action.payload);
+    case ACTIONCONST.ADD_USER:
       return action.payload;
-    case REMOVE_USER:
-      console.log("User Removed from Store", action.payload);
-      return action.payload;
+    case ACTIONCONST.REMOVE_USER:
+      localStorage.removeItem('token');
+      return null;
     default:
       return state;
   }

@@ -1,19 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.scss';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container } from 'reactstrap'
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
+import { Container } from 'reactstrap';
 
-import Login from './components/user/login/login';
-import Taskboard from './components/taskBoard/taskboard';
+import Notebook from './components/taskBoard/taskboard';
 import Header from './components/navBar/navbar';
 import Todos from "./components/toDos/toDos";
 import Home from './page/home';
-import Signup from './components/user/signup/signup';
-import Reset from './components/user/reset/reset'
+import Dashboard from './page/dashboard';
+import axios from './http/axios';
+import { connect } from 'react-redux';
+import { addUser } from './store/action/action';
+import WithProtectedRoute from './components/hoc/withProtectedRoute';
 
 
-function App() {
-  console.log(process.env.REACT_APP_BASE_API);
+function App(props) {
+
+  const [token] = useState(localStorage.getItem('token'))
+
+  useEffect(() => {
+    if(token){
+      axios.get('/validate')
+      .then( res => props.loginHandler(res.data) )
+      .catch( err => {
+        console.log(err);
+      })
+    } else {
+      console.log('Not login!', token)  
+    }
+    return () => {
+      console.log("App.js cleanup")
+    }
+  }, [])
+
   return (
     <Router>
       <Container fluid className="p-0 d-flex flex-column appContent">
@@ -21,16 +40,34 @@ function App() {
           <Header></Header>
         </Container>
         <Container fluid className="contentBody p-0">
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/signin" component={Login}></Route>
-          <Route path="/signup" component={Signup}></Route>
-          <Route path="/reset" component={Reset}></Route>
-          <Route path="/taskboard" component={Taskboard}></Route>
-          <Route path="/todolist" component={Todos}></Route>
+          <Route path="/home" component={Home} />
+          <Route path="/user" component={Home} />
+
+          <Route path="/dashboard"> 
+            <WithProtectedRoute><Dashboard/></WithProtectedRoute>
+          </Route>
+          <Route path="/notebook">
+            <WithProtectedRoute><Notebook/></WithProtectedRoute>
+          </Route>
+          <Route path="/todolist">
+            <WithProtectedRoute><Todos/></WithProtectedRoute>
+          </Route>
+          
+          <Route path="/" exact render={() => <Redirect to="/home" /> } />
         </Container>
       </Container>
     </Router>
   );
 }
 
-export default App;
+// const mapStateToProps = ({user}) => {
+//   return user;
+// } 
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loginHandler: (userdata) => dispatch(addUser(userdata)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

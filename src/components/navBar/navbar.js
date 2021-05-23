@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
 import { Container, Button, Navbar, Nav, NavItem } from 'reactstrap';
-import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
+import { RiMenu3Fill, RiCloseFill, RiLogoutBoxLine } from "react-icons/ri";
 import { Link } from 'react-router-dom'
+import WithTooltip from '../hoc/withTooltip'
+import { connect } from 'react-redux';
+import { removeUser } from '../../store/action/action';
+
 
 const Header = (props) => {
 
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
-
+  
   return (
     <Navbar color="dark" dark>
       <Container fluid>
-          <Link to="/" className="brandName mr-auto">
-            FORTY
-          </Link>
+        <Link to="/home" className="brandName mr-auto">
+          FORTY
+        </Link>
         <div className="navbarMenuIcon" >
-          <RiMenu3Fill onClick={toggleNavbar} className="mr-2" />
+          <WithTooltip>
+            <span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
+              <RiLogoutBoxLine />
+            </span>
+            <span className="m-2" onClick={toggleNavbar}  data-tip="Menu">
+              <RiMenu3Fill/>
+            </span>
+          </WithTooltip>
         </div>
         <Container fluid className={!collapsed ? 'navBar show' : 'navBar'}>
           <div className="closeModal" onClick={toggleNavbar}>
@@ -30,7 +41,7 @@ const Header = (props) => {
               <Link to="/todolist" onClick={toggleNavbar}>To Do</Link>
             </NavItem>
             <NavItem>
-              <Link to="/taskboard" onClick={toggleNavbar}>Taskboard</Link>
+              <Link to="/notebook" onClick={toggleNavbar}>Notes</Link>
             </NavItem>
             <NavItem>
               <Link to="/about" onClick={toggleNavbar}>About</Link>
@@ -39,7 +50,7 @@ const Header = (props) => {
               <Link to="/contact" onClick={toggleNavbar}>Contact</Link>
             </NavItem>
             <NavItem className="b-none w-100">
-              <Link to="/signin" onClick={toggleNavbar}>
+              <Link to="/user/signin" onClick={toggleNavbar}>
                 <Button size="lg" color="primary l-10" className="d-block m-auto w-100 text-uppercase">
                   Sign In
                 </Button>
@@ -52,4 +63,9 @@ const Header = (props) => {
   )
 }
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutHandler: () => dispatch(removeUser())
+  }
+}
+export default connect(null, mapDispatchToProps)(Header);
