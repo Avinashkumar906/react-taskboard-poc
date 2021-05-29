@@ -5,14 +5,14 @@ import { Redirect } from 'react-router'
 const WithProtectedRoute = (props) => {
   
   const redirectSignIn = <Redirect to="/user/signin" />
-
+  const token = localStorage.getItem('token')
   return (
-    props.user ? props.children : redirectSignIn
+    token ? props.children : redirectSignIn
   )
 }
 
-const mapStateToProps = ({user}) => {
-  return { user }
-}
+// const mapStateToProps = ({user}) => {
+//   return { user }
+// }
 
-export default connect(mapStateToProps)(WithProtectedRoute);
+export default connect(null)(WithProtectedRoute);

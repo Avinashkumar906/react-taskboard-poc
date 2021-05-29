@@ -4,9 +4,13 @@ import { AiFillThunderbolt,AiOutlineArrowDown } from "react-icons/ai";
 import { BiStar, BiEditAlt, BiTag, BiShare, BiCalendar } from "react-icons/bi";
 
 function TodosCard({data}) {
+
+  const handleDragStart = (e, id) => {
+    e.dataTransfer.setData("_id", id);
+  }
   // console.log(data)
   return (
-    <Card className="mb-2">
+    <Card className="mb-2 c-pointer" onDragStart={(e) => handleDragStart(e, data._id)} draggable="true" >
       <Row className="m-0">
         <Col sm="12" className="text-end p-0">
           <ButtonGroup>

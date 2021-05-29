@@ -26,6 +26,19 @@ const ToDos = (props) => {
     return data.filter((e) => e.progress === filterKey)
   }
   
+  const handleDrop = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    // debugger;
+    console.log(e.target)
+    console.log(e.dataTransfer.getData("_id"))
+  };
+
+  const handleDragOver = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
     <Row className="toDos">
       <Col sm="12" className="header">
@@ -38,9 +51,15 @@ const ToDos = (props) => {
           </Button>
         </ButtonGroup>
       </Col>
-      <TodoColumn title="Backlog" cards={filterHandler(props.todos, "BACKLOG")} />
-      <TodoColumn title="Progress" cards={filterHandler(props.todos, "PROGRESS")} />
-      <TodoColumn title="Completed" cards={filterHandler(props.todos, "COMPLETED")} />
+      <div className="col-md-4 content">
+        <TodoColumn title="Backlog" cards={filterHandler(props.todos, "BACKLOG")} />
+      </div>
+      <div className="col-md-4 content bg-primary" onDrop={e => handleDrop(e)} onDragOver={e => handleDragOver(e)}>
+        <TodoColumn title="Progress" cards={filterHandler(props.todos, "PROGRESS")} />
+      </div>
+      <div className="col-md-4 content">
+        <TodoColumn title="Completed" cards={filterHandler(props.todos, "COMPLETED")} />
+      </div>
     </Row>
   )
 }

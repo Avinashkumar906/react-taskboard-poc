@@ -43,15 +43,11 @@ function App(props) {
           <Route path="/home" component={Home} />
           <Route path="/user" component={Home} />
 
-          <Route path="/dashboard"> 
-            <WithProtectedRoute><Dashboard/></WithProtectedRoute>
-          </Route>
-          <Route path="/notebook">
-            <WithProtectedRoute><Notebook/></WithProtectedRoute>
-          </Route>
-          <Route path="/todolist">
-            <WithProtectedRoute><Todos/></WithProtectedRoute>
-          </Route>
+          <WithProtectedRoute>
+            <Route path="/dashboard" component={Dashboard} /> 
+            <Route path="/notebook" component={Notebook} />
+            <Route path="/todolist" component={Todos}/>
+          </WithProtectedRoute>
           
           <Route path="/" exact render={() => <Redirect to="/home" /> } />
         </Container>

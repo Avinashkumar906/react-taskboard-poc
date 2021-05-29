@@ -20,9 +20,12 @@ const Header = (props) => {
         </Link>
         <div className="navbarMenuIcon" >
           <WithTooltip>
-            <span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
-              <RiLogoutBoxLine />
-            </span>
+            {
+              props.user ?
+              <span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
+                <RiLogoutBoxLine />
+              </span> : null
+            }
             <span className="m-2" onClick={toggleNavbar}  data-tip="Menu">
               <RiMenu3Fill/>
             </span>
@@ -63,9 +66,13 @@ const Header = (props) => {
   )
 }
 
+const mapStateToProps = ({user}) => {
+  return { user }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     logoutHandler: () => dispatch(removeUser())
   }
 }
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
