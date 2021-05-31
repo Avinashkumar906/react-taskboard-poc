@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Col, Card, CardHeader, CardBody } from "reactstrap";
-import { updateTodo } from '../../../store/action/action';
+import { Card, CardHeader, CardBody } from "reactstrap";
+import { updateTodoAsync } from '../../../store/reducer/asyncReducer'
 import TodosCard from '../todocard/todosCard';
 
 const TodoColumn = (props) => {
@@ -36,7 +36,7 @@ const TodoColumn = (props) => {
 
 const MapdispatchToProps = dispatch => {
   return {
-    handleStatus: (data) => dispatch(updateTodo(data)),
+    handleStatus: (data) => dispatch(updateTodoAsync(data)),
   }
 }
 
