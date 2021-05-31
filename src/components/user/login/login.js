@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { useFormik } from 'formik';
 
-import { fetchTasksboardAsync } from '../../../store/action/asyncAction';
+import { fetchTasksboardAsync } from '../../../store/reducer/asyncReducer';
 import { addUser } from '../../../store/action/action';
 // import * as ACTIONCONST from '../../../store/action/actionConstant';
 import axios from '../../../http/axios';

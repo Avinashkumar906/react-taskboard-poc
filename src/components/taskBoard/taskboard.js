@@ -6,7 +6,7 @@ import SunEditor from 'suneditor-react';
 import { RiAddCircleFill, RiRefreshFill, RiEditCircleFill, RiSaveFill, RiDeleteBin2Line} from 'react-icons/ri';
 
 import editorConfig from './editor.config'
-import { fetchTasksboardAsync } from '../../store/action/asyncAction';
+import { fetchTasksboardAsync } from '../../store/reducer/asyncReducer';
 import Board from './board/board'
 import axios from '../../http/axios';
 import WithModal from '../hoc/withModal';

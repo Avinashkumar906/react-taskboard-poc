@@ -15,3 +15,7 @@ export function addTaskboard(data){
 export function addTodo(data){ 
   return {type: ACTIONCONST.ADD_TODO, payload: data};
 }
+
+export function updateTodo(data){ 
+  return {type: ACTIONCONST.UPDATE_TODO, payload: data};
+}

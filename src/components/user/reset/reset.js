@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useFormik } from 'formik';
 
 import { addUser } from '../../../store/action/action';
-import { fetchTasksboardAsync } from "../../../store/action/asyncAction";
+import { fetchTasksboardAsync } from "../../../store/reducer/asyncReducer";
 import { connect } from 'react-redux'
 import axios from '../../../http/axios';
 

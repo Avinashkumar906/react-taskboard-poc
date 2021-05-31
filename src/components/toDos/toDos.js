@@ -4,7 +4,7 @@ import { RiRefreshFill, RiAddCircleFill } from "react-icons/ri";
 
 import TodoForm from './form/todoform';
 import withModal from '../hoc/withModal'
-import { fetchTodoAsync } from '../../store/action/asyncAction';
+import { fetchTodoAsync } from '../../store/reducer/asyncReducer';
 import { connect } from 'react-redux';
 import TodoColumn from './column/todoColumn';
 
@@ -25,19 +25,6 @@ const ToDos = (props) => {
   const filterHandler = (data, filterKey) => {
     return data.filter((e) => e.progress === filterKey)
   }
-  
-  const handleDrop = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    // debugger;
-    console.log(e.target)
-    console.log(e.dataTransfer.getData("_id"))
-  };
-
-  const handleDragOver = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
 
   return (
     <Row className="toDos">
@@ -52,13 +39,13 @@ const ToDos = (props) => {
         </ButtonGroup>
       </Col>
       <div className="col-md-4 content">
-        <TodoColumn title="Backlog" cards={filterHandler(props.todos, "BACKLOG")} />
-      </div>
-      <div className="col-md-4 content bg-primary" onDrop={e => handleDrop(e)} onDragOver={e => handleDragOver(e)}>
-        <TodoColumn title="Progress" cards={filterHandler(props.todos, "PROGRESS")} />
+        <TodoColumn title="BACKLOG" cards={filterHandler(props.todos, "BACKLOG")} />
       </div>
       <div className="col-md-4 content">
-        <TodoColumn title="Completed" cards={filterHandler(props.todos, "COMPLETED")} />
+        <TodoColumn title="PROGRESS" cards={filterHandler(props.todos, "PROGRESS")} />
+      </div>
+      <div className="col-md-4 content">
+        <TodoColumn title="COMPLETED" cards={filterHandler(props.todos, "COMPLETED")} />
       </div>
     </Row>
   )

@@ -1,5 +1,5 @@
 import axios from '../../http/axios';
-import * as ACTION from './action';
+import * as ACTION from '../action/action';
 
 export function fetchTasksboardAsync() {
   return dispatch => {
@@ -17,10 +17,8 @@ export function fetchTasksboardAsync() {
 
 export function fetchTodoAsync() {
   return dispatch => {
-    // console.log("Calling async function!")
     axios.get('tasks').then(
       response => {
-        // console.log("response from server!", response.data)
         dispatch(ACTION.addTodo(response.data));
       }
     ).catch(
@@ -28,3 +26,15 @@ export function fetchTodoAsync() {
     )
   };
 }
+
+// export function updateTodoAsync(task) {
+//   return dispatch => {
+//     axios.patch('task', task).then(
+//       response => {
+//         dispatch(ACTION.addTodo(response.data));
+//       }
+//     ).catch(
+//       err=>console.log(err)
+//     )
+//   };
+// }

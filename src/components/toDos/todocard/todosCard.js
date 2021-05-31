@@ -5,12 +5,13 @@ import { BiStar, BiEditAlt, BiTag, BiShare, BiCalendar } from "react-icons/bi";
 
 function TodosCard({data}) {
 
-  const handleDragStart = (e, id) => {
+  const handleDragStart = (e, id, progress) => {
     e.dataTransfer.setData("_id", id);
+    e.dataTransfer.setData("progress", progress);
   }
-  // console.log(data)
+
   return (
-    <Card className="mb-2 c-pointer" onDragStart={(e) => handleDragStart(e, data._id)} draggable="true" >
+    <Card className="mb-2 c-pointer" onDragStart={(e) => handleDragStart(e, data._id, data.progress)} draggable="true" >
       <Row className="m-0">
         <Col sm="12" className="text-end p-0">
           <ButtonGroup>
