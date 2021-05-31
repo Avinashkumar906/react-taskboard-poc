@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Button, Navbar, Nav, NavItem } from 'reactstrap';
-import { RiMenu3Fill, RiCloseFill, RiLogoutBoxLine } from "react-icons/ri";
+import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
+import { AiOutlinePoweroff } from "react-icons/ai";
 import { Link } from 'react-router-dom'
 import WithTooltip from '../hoc/withTooltip'
 import { connect } from 'react-redux';
@@ -23,7 +24,7 @@ const Header = (props) => {
             {
               props.user ?
               <span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
-                <RiLogoutBoxLine />
+                <AiOutlinePoweroff />
               </span> : null
             }
             <span className="m-2" onClick={toggleNavbar}  data-tip="Menu">
