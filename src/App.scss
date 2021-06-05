@@ -143,6 +143,20 @@ a {
   // overflow-x: hidden;
 }
 
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-fg2 !important;
+  color: text-color($color-fg2);
+  z-index: 999999;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
 .navbar {
   background-color: $color-bg1 !important;
   z-index: 999;

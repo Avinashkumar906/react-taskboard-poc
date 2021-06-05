@@ -11,6 +11,7 @@ import Dashboard from './page/dashboard';
 import axios from './http/axios';
 import { connect } from 'react-redux';
 import { addUser } from './store/action/action';
+import Spinner from './components/hoc/spinner';
 import WithProtectedRoute from './components/hoc/withProtectedRoute';
 
 
@@ -52,6 +53,7 @@ function App(props) {
           <Route path="/" exact render={() => <Redirect to="/home" /> } />
         </Container>
       </Container>
+      <Spinner />
     </Router>
   );
 }

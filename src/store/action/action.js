@@ -19,3 +19,11 @@ export function addTodo(data){
 export function updateTodo(data){ 
   return {type: ACTIONCONST.UPDATE_TODO, payload: data};
 }
+
+export function showLoader(){ 
+  return {type: ACTIONCONST.SHOW_LOADER};
+}
+
+export function hideLoader(){ 
+  return {type: ACTIONCONST.HIDE_LOADER};
+}
