@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.scss';
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { Container } from 'reactstrap';
 
 import Notebook from './components/taskBoard/taskboard';
@@ -41,14 +41,16 @@ function App(props) {
           <Header></Header>
         </Container>
         <Container fluid className="contentBody p-0">
-          <Route path="/home" component={Home} />
-          <Route path="/user" component={Home} />
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/user" component={Home} />
 
-          <WithProtectedRoute path="/dashboard" component={Dashboard}/>
-          <WithProtectedRoute path="/notebook" component={Notebook}/>
-          <WithProtectedRoute path="/todolist" component={Todos}/>
-          
-          <Route path="/" exact render={() => <Redirect to="/home" /> } />
+            <WithProtectedRoute path="/dashboard" component={Dashboard}/>
+            <WithProtectedRoute path="/notebook" component={Notebook}/>
+            <WithProtectedRoute path="/todolist" component={Todos}/>
+            
+            <Route path="/" exact render={() => <Redirect to="/home" /> } />
+          </Switch>
         </Container>
       </Container>
       <Spinner />
