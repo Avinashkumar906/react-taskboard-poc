@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router'
+import { Route, useHistory } from 'react-router'
 
 const WithProtectedRoute = (props) => {
+
+  const history = useHistory()
+  const [userToken, setUserToken] = useState(props.user.token)
   
-  const redirectSignIn = <Redirect to="/user/signin" />
-  const token = localStorage.getItem('token')
+  useEffect(() => {
+    if(!userToken){
+      history.push('/user/signin');
+    } else {
+      setUserToken(props.user.token)
+    }
+    return () => {
+      // console.log("cleanup protected route")
+    }
+  }, [userToken])
+
   return (
-    token ? props.children : redirectSignIn
+    userToken ? <Route {...props} /> : <></>
   )
 }
 
-// const mapStateToProps = ({user}) => {
-//   return { user }
-// }
+const mapStateToProps = ({user}) => {
+  return { user }
+}
 
-export default connect(null)(WithProtectedRoute);
+export default connect(mapStateToProps)(WithProtectedRoute);

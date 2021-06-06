@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { useFormik } from 'formik';
 
 import { fetchTasksboardAsync } from '../../../store/reducer/asyncReducer';
-import { addUser } from '../../../store/action/action';
+import { addUser, showLoader, hideLoader } from '../../../store/action/action';
 // import * as ACTIONCONST from '../../../store/action/actionConstant';
 import axios from '../../../http/axios';
 
@@ -36,14 +36,20 @@ const Login = (props) => {
       },
       onSubmit: values => {
         if(formik.dirty && formik.isValid){
+          props.showLoading()
           axios.post('/signin',values).then(
             response => {
-              localStorage.setItem('token', response.data.token);
-              props.loginHandler(response.data.user);
-              props.fetchTasksboard();
+              let user = response.data.user
+              user.token = response.data.token
+              localStorage.setItem('token', user.token);
+              props.loginHandler(user);
+              props.hideLoading()
             }
           ).catch(
-            err => console.log(err)
+            err => {
+              console.log(err);
+              props.hideLoading();
+            }
           )
         }
       },
@@ -91,7 +97,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     loginHandler: (userdata) => dispatch(addUser(userdata)),
-    fetchTasksboard: () => dispatch(fetchTasksboardAsync())
+    fetchTasksboard: () => dispatch(fetchTasksboardAsync()),
+    showLoading: () => dispatch(showLoader()),
+    hideLoading: () => dispatch(hideLoader())
   }
 }
 

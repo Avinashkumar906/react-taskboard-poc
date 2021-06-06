@@ -1,12 +1,13 @@
 import * as ACTIONCONST from '../action/actionConstant';
 
-const reducer = (state = null, action) =>{
+const STATE = { token : localStorage.getItem('token')}
+const reducer = (state = STATE, action) =>{
   switch (action.type) {
     case ACTIONCONST.ADD_USER:
-      return action.payload;
+      return {...state,...action.payload};
     case ACTIONCONST.REMOVE_USER:
       localStorage.removeItem('token');
-      return null;
+      return { token : null };
     default:
       return state;
   }

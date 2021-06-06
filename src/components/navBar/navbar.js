@@ -20,17 +20,15 @@ const Header = (props) => {
           FORTY
         </Link>
         <div className="navbarMenuIcon" >
-          <WithTooltip>
-            {
-              props.user ?
-              <span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
-                <AiOutlinePoweroff />
-              </span> : null
-            }
-            <span className="m-2" onClick={toggleNavbar}  data-tip="Menu">
-              <RiMenu3Fill/>
-            </span>
-          </WithTooltip>
+          {
+            props.user.token ?
+            <WithTooltip><span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
+              <AiOutlinePoweroff />
+            </span></WithTooltip> : null
+          }
+          <WithTooltip><span className="m-2" onClick={toggleNavbar}  data-tip="Menu">
+            <RiMenu3Fill/>
+          </span></WithTooltip>
         </div>
         <Container fluid className={!collapsed ? 'navBar show' : 'navBar'}>
           <div className="closeModal" onClick={toggleNavbar}>
