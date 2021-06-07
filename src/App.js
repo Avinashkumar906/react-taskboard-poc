@@ -11,7 +11,8 @@ import Dashboard from './page/dashboard';
 import axios from './http/axios';
 import { connect } from 'react-redux';
 import { addUser } from './store/action/action';
-import Spinner from './components/hoc/spinner';
+import Spinner from './components/misc/spinner';
+import Toast from "./components/misc/toast";
 import WithProtectedRoute from './components/hoc/withProtectedRoute';
 
 
@@ -53,6 +54,7 @@ function App(props) {
           </Switch>
         </Container>
       </Container>
+      <Toast />
       <Spinner />
     </Router>
   );

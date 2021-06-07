@@ -1,13 +1,9 @@
 import * as ACTIONCONST from '../action/actionConstant'
 
-function findandUpdate(list, _id, progress) {
+function findandUpdate(list, data) {
   const updatedState = [...list]
-  const indexToUpdate = updatedState.findIndex(item => item._id === _id)
-  if(indexToUpdate >= 0){
-    const item = updatedState[indexToUpdate];
-    item.progress = progress;
-    updatedState[indexToUpdate] = item;
-  }
+  const indexToUpdate = updatedState.findIndex(item => item._id === data._id)
+  indexToUpdate >= 0 && (updatedState[indexToUpdate] = data );
   return updatedState;
 }
 
@@ -17,7 +13,7 @@ const reducer = (state = [], action) =>{
       return action.payload;
     }
     case ACTIONCONST.UPDATE_TODO:{
-      return findandUpdate(state, action.payload._id, action.payload.progress)
+      return findandUpdate(state, action.payload)
     }
     default:
       return state;

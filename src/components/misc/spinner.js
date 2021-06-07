@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import HashLoader from "react-spinners/HashLoader";
 
 const Spinner = (props) => {
+  console.log(props.update)
   return (
     props.update.loader ?
     <div className="backdrop">
-    <HashLoader color="ffffff" loading="true"></HashLoader>
+      <HashLoader color="ffffff" loading="true"></HashLoader>
     </div> : null
   )
 }

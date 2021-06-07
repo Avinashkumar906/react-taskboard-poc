@@ -34,9 +34,10 @@ export function updateTodoAsync(data) {
   return (dispatch, getState) => {
     let task = findById(getState().todos, data._id)
     task.progress = data.progress;
+    dispatch(ACTION.updateTodo(task)) 
     axios.patch('task', task).then(
       response => {
-        dispatch(ACTION.updateTodo(data)) 
+        dispatch(ACTION.showToast(new Object({title:"update",body:"Board Updated !"}))) 
       }
     ).catch(
       err=>console.log(err)

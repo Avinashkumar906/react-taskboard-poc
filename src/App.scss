@@ -157,6 +157,21 @@ a {
   display: flex;
 }
 
+.toastHolder {
+  position: fixed;
+  // top: 0;
+  bottom: 0;
+  // left: 0;
+  right: 0;
+  // background-color: $color-bg2;
+  // color: text-color($color-bg2);
+  z-index: 99;
+  align-items: flex-end;
+  justify-content: flex-end;
+  display: flex;
+  padding: 16px;
+}
+
 .navbar {
   background-color: $color-bg1 !important;
   z-index: 999;

@@ -27,3 +27,11 @@ export function showLoader(){
 export function hideLoader(){ 
   return {type: ACTIONCONST.HIDE_LOADER};
 }
+
+export function showToast(data){ 
+  return {type: ACTIONCONST.SHOW_TOAST, payload: data};
+}
+
+export function hideToast(data){ 
+  return {type: ACTIONCONST.HIDE_TOAST, payload: data};
+}
