@@ -14,7 +14,8 @@ const reducer = (state = STATE, action) =>{
     case ACTIONCONST.SHOW_TOAST:
       return {...state, toast: [...state.toast, action.payload]};
     case ACTIONCONST.HIDE_TOAST:
-      return {...state, toast: []};
+      let [toRemove,...toast] = state.toast;
+      return {...state, toast};
     default:
       return state;
   }

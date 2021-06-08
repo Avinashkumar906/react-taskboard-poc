@@ -14,7 +14,7 @@ const ToDos = (props) => {
   // console.log(props.todos)
 
   useEffect(() => {
-    if(true){
+    if(!props.todos.length){
       props.fetchTodoHandler();
     }
     return () => {

@@ -8,24 +8,34 @@ function findById(arr, _id) {
 
 export function fetchTasksboardAsync() {
   return dispatch => {
+    dispatch(ACTION.showLoader())
     axios.get('tasksboard').then(
       response => {
         dispatch(ACTION.addTaskboard(response.data));
+        dispatch(ACTION.hideLoader())
       }
     ).catch(
-      err=>console.log(err)
+      err=>{
+        console.log(err)
+        dispatch(ACTION.hideLoader())
+      }
     )
   };
 }
 
 export function fetchTodoAsync() {
   return dispatch => {
+    dispatch(ACTION.showLoader())
     axios.get('tasks').then(
       response => {
         dispatch(ACTION.addTodo(response.data));
+        dispatch(ACTION.hideLoader())
       }
     ).catch(
-      err=>console.log(err)
+      err=>{
+        console.log(err)
+        dispatch(ACTION.hideLoader())
+      }
     )
   };
 }
