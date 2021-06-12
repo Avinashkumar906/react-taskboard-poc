@@ -1,11 +1,13 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import axios from '../../../http/axios';
 
 const Signup = (props) => {
+
+  const history = useHistory()
   
   const formik = useFormik({
     initialValues: {
@@ -32,9 +34,9 @@ const Signup = (props) => {
     },
     onSubmit: values => {
       if(formik.dirty && formik.isValid){
-        // console.log(values)
         axios.post('/signup',values).then(
           response => {
+            history.push('/user/signin');
             console.log(response)
           }
         ).catch(
@@ -69,7 +71,7 @@ const Signup = (props) => {
             <Button type="submit" color="primary" disabled={!(formik.dirty && formik.isValid)}>Sign Up</Button>
             <span className="mx-2"> Or </span> 
             <Link to="signin">
-              <Button type="button" color="secondary">Already Registered</Button>
+              <Button type="button" color="secondary">Sign In</Button>
             </Link>
             <div className="mt-2">
               <small>Forget password <Link to="reset">click here!</Link></small>

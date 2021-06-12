@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useFormik } from 'formik';
 
@@ -9,6 +9,8 @@ import { connect } from 'react-redux'
 import axios from '../../../http/axios';
 
 const Reset = (props) => {
+
+  const history = useHistory();
   
   // axios.get('/validate').then(res => console.log(res));
   // axios.get('/tasksboard').then(res => console.log(res));
@@ -37,10 +39,8 @@ const Reset = (props) => {
       if(formik.dirty && formik.isValid){
         axios.post('/reset', values).then(
           response => {
+            history.push('/user/signin');
             console.log(response)
-            // localStorage.setItem('token', response.data.token);
-            // props.loginHandler(response.data.user);
-            // props.fetchTasksboard();
           }
         ).catch(
           err => console.log(err)

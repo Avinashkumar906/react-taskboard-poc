@@ -1,12 +1,11 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { useFormik } from 'formik';
 
 import { fetchTasksboardAsync } from '../../../store/reducer/asyncReducer';
 import { addUser, showLoader, hideLoader } from '../../../store/action/action';
-// import * as ACTIONCONST from '../../../store/action/actionConstant';
 import axios from '../../../http/axios';
 
 
@@ -14,6 +13,7 @@ const Login = (props) => {
   
   // axios.get('/validate').then(res => console.log(res));
   // axios.get('/tasksboard').then(res => console.log(res));
+  const history = useHistory()
 
   const formik = useFormik({
       initialValues: {
@@ -42,8 +42,9 @@ const Login = (props) => {
               let user = response.data.user
               user.token = response.data.token
               localStorage.setItem('token', user.token);
-              props.loginHandler(user);
               props.hideLoading()
+              props.loginHandler(user);
+              history.push('/dashboard')
             }
           ).catch(
             err => {

@@ -11,7 +11,7 @@ const ToastComp = (props) => {
     const timer = setTimeout(() => {
       props.hideToastHandler();
       // console.log('This will run after 4 second!')
-    }, 5000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, [update.toast.length]);
 
