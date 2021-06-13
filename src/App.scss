@@ -296,6 +296,9 @@ a {
   font-size: inherit;
   letter-spacing: inherit;
   pointer-events: initial;
+  &.br-0 {
+    border-radius: 0;
+  }
   &:focus {
     box-shadow: none; // outline: ;
   }
@@ -445,11 +448,14 @@ a {
       margin-bottom: 8px;
     }
     .card-body-info {
-      // font-size: 16px;
-      // line-height: 1.2;
       span {
         display: block;
       }
+    }
+  }
+  .calender {
+    span {
+      vertical-align: middle;
     }
   }
   &.active {
@@ -592,4 +598,18 @@ a {
 
 .text-end {
   text-align: end !important;
+}
+
+.hidden {
+  height: 0;
+  display: none;
+  visibility: hidden;
+  transition: all .5s;
+}
+
+.visible {
+  height: auto;
+  display: inherit;
+  visibility: visible;
+  transition: all .5s;
 }

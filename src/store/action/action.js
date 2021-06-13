@@ -20,6 +20,10 @@ export function updateTodo(data){
   return {type: ACTIONCONST.UPDATE_TODO, payload: data};
 }
 
+export function deleteTodo(data){ 
+  return {type: ACTIONCONST.DELETE_TODO, payload: data};
+}
+
 export function showLoader(){ 
   return {type: ACTIONCONST.SHOW_LOADER};
 }

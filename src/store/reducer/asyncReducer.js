@@ -54,3 +54,19 @@ export function updateTodoAsync(data) {
     )
   };
 }
+
+export function deleteTodoAsync(data) {
+  return (dispatch) => {
+    dispatch(ACTION.deleteTodo(data));
+    axios.delete(`task?taskId=${data._id}`).then(
+      response => {
+        dispatch(ACTION.showToast(new Object({title:"Update",body:"Task Delete Success!"}))) 
+      }
+    ).catch(
+      err=>{
+        console.log(err)
+        dispatch(ACTION.showToast(new Object({title:"Update",body:"Unable to delete task!"}))) 
+      }
+    )
+  };
+}

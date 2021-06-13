@@ -4,6 +4,7 @@ import { RiRefreshFill, RiAddCircleFill } from "react-icons/ri";
 
 import TodoForm from './form/todoform';
 import withModal from '../hoc/withModal'
+import WithTooltip from '../hoc/withTooltip';
 import { fetchTodoAsync } from '../../store/reducer/asyncReducer';
 import { connect } from 'react-redux';
 import TodoColumn from './column/todoColumn';
@@ -30,12 +31,14 @@ const ToDos = (props) => {
     <Row className="toDos">
       <Col sm="12" className="header">
         <ButtonGroup className="justify-self-end"> 
-          <Button color="ternary" className="border-radius-0" onClick={props.fetchTodoHandler}>
-            <RiRefreshFill/>
-          </Button>
-          <Button color="ternary" className="border-radius-0" onClick={props.toggle}>
-            <RiAddCircleFill/>
-          </Button>
+          <WithTooltip>
+            <Button color="ternary br-0" data-tip="Refresh" onClick={props.fetchTodoHandler}>
+              <RiRefreshFill/>
+            </Button>
+            <Button color="ternary  br-0" className="border-radius-0" data-tip="Add" onClick={props.toggle}>
+              <RiAddCircleFill/>
+            </Button>
+          </WithTooltip>
         </ButtonGroup>
       </Col>
       <div className="col-md-4 content">

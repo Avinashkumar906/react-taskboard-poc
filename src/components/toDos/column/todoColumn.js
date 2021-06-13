@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
-import { updateTodoAsync } from '../../../store/reducer/asyncReducer'
+import { updateTodoAsync, deleteTodoAsync } from '../../../store/reducer/asyncReducer'
 import TodosCard from '../todocard/todosCard';
 
 const TodoColumn = (props) => {
@@ -21,14 +21,18 @@ const TodoColumn = (props) => {
     e.preventDefault();
     e.stopPropagation();
   };
-  // console.log(props.cards)
+
+  const handleDelete = (data) => {
+    props.handleDelete(data);
+  }
+
   return (
     <Card className="h-100 headerFixCard">
       <CardHeader className="justify-content-center fixHeaderTop">
         <span className="text-uppercase h5 m-0">{props.title}</span>
       </CardHeader>
       <CardBody className="overflowY" onDrop={e => handleDrop(e)} onDragOver={e => handleDragOver(e)}>
-          {props.cards.map((data) => <TodosCard data={data} key={data._id} />)}
+          {props.cards.map((data) => <TodosCard data={data} onDelete={handleDelete} key={data._id} />)}
       </CardBody>
     </Card>
   )
@@ -37,6 +41,7 @@ const TodoColumn = (props) => {
 const MapdispatchToProps = dispatch => {
   return {
     handleStatus: (data) => dispatch(updateTodoAsync(data)),
+    handleDelete: (data) => dispatch(deleteTodoAsync(data))
   }
 }
 

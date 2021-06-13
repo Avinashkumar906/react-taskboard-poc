@@ -11,8 +11,6 @@ import axios from '../../../http/axios';
 
 const Login = (props) => {
   
-  // axios.get('/validate').then(res => console.log(res));
-  // axios.get('/tasksboard').then(res => console.log(res));
   const history = useHistory()
 
   const formik = useFormik({

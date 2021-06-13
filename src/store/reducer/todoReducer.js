@@ -6,6 +6,12 @@ function findandUpdate(list, data) {
   indexToUpdate >= 0 && (updatedState[indexToUpdate] = data );
   return updatedState;
 }
+function findandDelete(list, data) {
+  const updatedState = [...list]
+  const indexToUpdate = updatedState.findIndex(item => item._id === data._id)
+  indexToUpdate >= 0 && (updatedState.splice(indexToUpdate, 1) );
+  return updatedState;
+}
 
 const reducer = (state = [], action) =>{
   switch (action.type) {
@@ -14,6 +20,9 @@ const reducer = (state = [], action) =>{
     }
     case ACTIONCONST.UPDATE_TODO:{
       return findandUpdate(state, action.payload)
+    }
+    case ACTIONCONST.DELETE_TODO:{
+      return findandDelete(state, action.payload)
     }
     default:
       return state;
