@@ -12,12 +12,16 @@ export function addTaskboard(data){
   return {type: ACTIONCONST.ADD_TASKBOARD, payload: data};
 }
 
-export function addTodo(data){ 
-  return {type: ACTIONCONST.ADD_TODO, payload: data};
+export function addTodoList(data){ 
+  return {type: ACTIONCONST.ADD_TODO_LIST, payload: data};
 }
 
 export function updateTodo(data){ 
   return {type: ACTIONCONST.UPDATE_TODO, payload: data};
+}
+
+export function addTodo(data){ 
+  return {type: ACTIONCONST.ADD_TODO, payload: data};
 }
 
 export function deleteTodo(data){ 
@@ -38,4 +42,8 @@ export function showToast(data){
 
 export function hideToast(data){ 
   return {type: ACTIONCONST.HIDE_TOAST, payload: data};
+}
+
+export function revertState(type, payload){ 
+  return {type, payload};
 }

@@ -1,9 +1,11 @@
 import { useFormik } from 'formik';
 import React from 'react'
+import { connect } from 'react-redux';
 import { Form, Label, Input, FormGroup, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
-import axios from '../../../http/axios';
+import { addTodoAsync } from '../../../store/reducer/asyncReducer';
 
 function Todoform(props) {
+
   function getdate(){
     const offset = new Date().getTimezoneOffset() * 60000;
     return (new Date(Date.now() - offset)).toISOString().slice(0, -5);
@@ -29,18 +31,15 @@ function Todoform(props) {
       if (!/^(?![\s-])[\w\s-]+$/i.test(values.title)) {
         errors.title = 'Enter valid title';
       } 
-      if (!/^(?![\s-])[\w\s-]+$/i.test(values.description)) {
+      if (!values.description || values.description === '') {
         errors.description = 'Enter valid description';
       } 
       return errors
     },
     onSubmit: values => {
       if(formik.dirty && formik.isValid){
-        axios.post('task', values).then(
-          res=>console.log(res.data)
-        ).catch(
-          err=>console.log(err)
-        )
+        props.handleAddTask(values)
+        props.toggle()
       }
     },
   });
@@ -56,7 +55,7 @@ function Todoform(props) {
           </FormGroup>
           <FormGroup className="mb-2"> 
             <Label for="description">Task description</Label>
-            <Input id="description" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.description} name="description" type="text" placeholder="Task description" />
+            <Input id="description" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.description} name="description" type="textarea" rows="3"  placeholder="Task description" />
             {formik.errors.description && formik.touched.description ? <small className="form-text text-danger">{formik.errors.description}</small>: ''}
           </FormGroup>
           <FormGroup className="mb-2 d-flex"> 
@@ -110,11 +109,17 @@ function Todoform(props) {
           </FormGroup>
       </ModalBody>
       <ModalFooter>
-        <Button disabled={!(formik.dirty && formik.isValid)} type="submit" color="ternary" size="sm">Add</Button>
-        <Button type="button" color="secondary" size="sm" onClick={props.toggle}>Close</Button>
+        <Button disabled={!(formik.dirty && formik.isValid)} type="submit" color="secondary l-10 br-0" size="sm">Add</Button>
+        <Button type="button" color="primary l-10 br-0" size="sm" onClick={props.toggle}>Close</Button>
       </ModalFooter>
     </Form>
   )
 }
 
-export default Todoform
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleAddTask: (task) => dispatch(addTodoAsync(task))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Todoform); 

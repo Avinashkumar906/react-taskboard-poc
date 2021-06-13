@@ -409,7 +409,9 @@ a {
   color: text-color($color-light);
   border-color: text-color($color-light);
   position: relative;
-  cursor: pointer;
+  &.pointer{
+    cursor: pointer;
+  }
   &.headerFixCard {
     cursor: auto;
     padding-top: 36px;

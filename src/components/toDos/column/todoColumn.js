@@ -10,10 +10,10 @@ const TodoColumn = (props) => {
     e.preventDefault();
     e.stopPropagation();
     const currentProgress = e.dataTransfer.getData("progress")
-    if(currentProgress !== props.title){
+    if(currentProgress && currentProgress !== props.title){
       props.handleStatus({progress: props.title, _id: e.dataTransfer.getData("_id")})
     } else {
-      console.log('Same Column')
+      console.log('Cannot drop!')
     }
   };
 

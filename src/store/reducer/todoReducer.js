@@ -15,8 +15,11 @@ function findandDelete(list, data) {
 
 const reducer = (state = [], action) =>{
   switch (action.type) {
-    case ACTIONCONST.ADD_TODO:{
+    case ACTIONCONST.ADD_TODO_LIST:{
       return action.payload;
+    }
+    case ACTIONCONST.ADD_TODO:{
+      return [...state, action.payload];
     }
     case ACTIONCONST.UPDATE_TODO:{
       return findandUpdate(state, action.payload)
