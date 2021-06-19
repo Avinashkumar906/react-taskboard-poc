@@ -409,7 +409,7 @@ a {
   color: text-color($color-light);
   border-color: text-color($color-light);
   position: relative;
-  &.pointer{
+  &.pointer {
     cursor: pointer;
   }
   &.headerFixCard {
@@ -549,6 +549,10 @@ a {
   .item8 {
     grid-column: span 2; // grid-column: 3/ span 2;
     // grid-row: 3/ span 1;
+  }
+  @media screen and (max-width: 768px) {
+    display: flex !important;
+    flex-direction: column;
   }
 }
 

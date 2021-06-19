@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const Dashboard = (props) => {
   
   return (
-    <Row className="h-100 m-0">
+    <Row className="h-100 m-0 overflowY">
       <div className="gridDashboard">
         <div className="gridItem item1 bg-primary2">
           <Row className="">
