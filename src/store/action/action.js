@@ -12,6 +12,14 @@ export function addTaskboard(data){
   return {type: ACTIONCONST.ADD_TASKBOARD, payload: data};
 }
 
+export function updateTaskboard(data){ 
+  return {type: ACTIONCONST.UPDATE_TASKBOARD, payload: data};
+}
+
+export function deleteTaskboard(data){ 
+  return {type: ACTIONCONST.DELETE_TASKBOARD, payload: data};
+}
+
 export function addTodoList(data){ 
   return {type: ACTIONCONST.ADD_TODO_LIST, payload: data};
 }

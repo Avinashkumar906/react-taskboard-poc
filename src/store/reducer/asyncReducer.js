@@ -5,6 +5,23 @@ function findById(arr, _id) {
   return arr.find(item => item._id === _id);
 }
 
+export function addTasksboardAsync(note) {
+  return dispatch => {
+    dispatch(ACTION.showLoader())
+    axios.post('taskboard', note).then(
+      response => {
+        dispatch(ACTION.updateTaskboard(response.data));
+        dispatch(ACTION.hideLoader())
+      }
+    ).catch(
+      err=>{
+        console.log(err)
+        dispatch(ACTION.hideLoader())
+      }
+    )
+  };
+}
+
 export function fetchTasksboardAsync() {
   return dispatch => {
     dispatch(ACTION.showLoader())
@@ -21,10 +38,39 @@ export function fetchTasksboardAsync() {
     )
   };
 }
+export function updateTasksboardAsync(note) {
+  return dispatch => {
+    axios.patch('taskboard', note).then(
+      response => {
+        dispatch(ACTION.updateTaskboard(response.data))
+        dispatch(ACTION.showToast(new Object({title:"Update",body:"Board Updated !"}))) 
+      }
+    ).catch(
+      err=>{
+        console.log(err)
+        dispatch(ACTION.showToast(new Object({title:"Error",body:"Error occured !"}))) 
+      }
+    )
+  };
+}
+export function deleteTasksboardAsync(note) {
+  return dispatch => {
+    axios.delete(`taskboard?taskboardId=${note._id}`).then(
+      response => {
+        dispatch(ACTION.deleteTaskboard(note))
+        dispatch(ACTION.showToast(new Object({title:"Update",body:"Board Updated !"}))) 
+      }
+    ).catch(
+      err=>{
+        console.log(err)
+        dispatch(ACTION.showToast(new Object({title:"Error",body:"Error occured !"}))) 
+      }
+    )
+  };
+}
 
 export function fetchTodoAsync() {
   return dispatch => {
-    console.log('three')
     dispatch(ACTION.showLoader())
     axios.get('tasks').then(
       response => {

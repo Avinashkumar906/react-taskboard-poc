@@ -1,7 +1,8 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import { Button, Form, FormGroup, Input, Label, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import axios from '../../../http/axios';
+import { connect } from 'react-redux';
+import { addTasksboardAsync } from '../../../store/reducer/asyncReducer';
 
 function BoardForm(props) {
 
@@ -22,11 +23,8 @@ function BoardForm(props) {
       },
       onSubmit: values => {
         if(formik.dirty && formik.isValid){
-          axios.post('taskboard', values).then(
-            res=>console.log(res.data)
-          ).catch(
-            err=>console.log(err)
-          )
+          props.saveFormHandler(values);
+          props.toggle();
         }
       },
     });
@@ -54,4 +52,10 @@ function BoardForm(props) {
   )
 }
 
-export default BoardForm
+const mapDispatchToProps = dispatch => {
+  return {
+    saveFormHandler: (data) => dispatch(addTasksboardAsync(data))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(BoardForm) 

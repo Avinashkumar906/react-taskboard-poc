@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux';
 import { Button, Row, Col, ButtonGroup, ListGroup, ListGroupItem } from 'reactstrap';
-// import {Link} from 'react-router-dom'
 import SunEditor from 'suneditor-react';
 import { RiAddCircleFill, RiRefreshFill, RiSaveFill, RiDeleteBin2Line} from 'react-icons/ri';
 
 import editorConfig from './editor.config'
-import { fetchTasksboardAsync } from '../../store/reducer/asyncReducer';
+import { deleteTasksboardAsync, fetchTasksboardAsync, updateTasksboardAsync } from '../../store/reducer/asyncReducer';
 import Board from './board/board'
-import axios from '../../http/axios';
 import WithModal from '../hoc/withModal';
 import WithTooltip from '../hoc/withTooltip';
 import BoardForm from './form/boardForm';
@@ -17,16 +15,17 @@ const Notebook = (props) => {
 
   const editorRef = useRef(null);
   const [currentTask, setCurrentTask] = useState(null)
+  const [updatedTask, setUpdatedTask] = useState(null)
 
   useEffect(() => {
     if(!props.tasksboard.length){
       props.fetchTaskboard()
+    } else if (updatedTask) {
+      clickTaskHandler(updatedTask)
     } else {
       clickTaskHandler(props.tasksboard[0])
     }
-    return () => {
-      console.log('Notebook js cleanup')
-    }
+    return () => null
   }, [props.tasksboard.length])
   
   const fetchTaskboardHandler = () => {
@@ -43,23 +42,20 @@ const Notebook = (props) => {
       if (element === ''  || element === undefined || element === null) {
         alert('Please write some text!');
       } else {
-        const request = {...currentTask, body: element}
-        axios.patch('taskboard', request).then(
-          res=>console.log(res.data)
-        ).catch(
-          err=>console.log(err)
-        )
+        props.updateTaskBoard({...currentTask, body: element})
       }
   }
 
   const deleteTaskboardHandler = () => {
     const result = window.confirm('Are you sure you want to delete?');
     if(currentTask && result){
-      axios.delete(`taskboard?taskboardId=${currentTask._id}`).then(
-        res=>console.log(res.data)
-      ).catch(
-        err=>console.log(err)
-      )
+      const index = props.tasksboard.findIndex((item)=>item._id === currentTask._id)
+      if(index > 0) {
+        setUpdatedTask(props.tasksboard[index-1])
+      } else {
+        setUpdatedTask(null)
+      }
+      props.deleteTaskBoard(currentTask)
     }
   }
 
@@ -112,7 +108,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    fetchTaskboard: () => dispatch(fetchTasksboardAsync())
+    fetchTaskboard: () => dispatch(fetchTasksboardAsync()),
+    updateTaskBoard: (data) => dispatch(updateTasksboardAsync(data)),
+    deleteTaskBoard: (data) => dispatch(deleteTasksboardAsync(data)) 
   }
 }
 

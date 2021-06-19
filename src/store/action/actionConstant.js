@@ -2,6 +2,8 @@ export const ADD_USER = "ADD_USER";
 export const REMOVE_USER = "REMOVE_USER";
 
 export const ADD_TASKBOARD = "ADD_TASKBOARD";
+export const UPDATE_TASKBOARD = "UPDATE_TASKBOARD";
+export const DELETE_TASKBOARD = "DELETE_TASKBOARD";
 
 export const ADD_TODO_LIST = "ADD_TODO_LIST";
 
