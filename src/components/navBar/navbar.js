@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Button, Navbar, Nav, NavItem } from 'reactstrap';
 import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
 import { AiOutlinePoweroff } from "react-icons/ai";
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import WithTooltip from '../hoc/withTooltip'
 import { connect } from 'react-redux';
 import { removeUser } from '../../store/action/action';
@@ -37,22 +37,22 @@ const Header = (props) => {
           {/* <div className="bg-blur"></div> */}
           <Nav navbar>
             <NavItem>
-              <Link to="/dashboard" onClick={toggleNavbar}>Dashboard</Link>
+              <NavLink to="/dashboard" onClick={toggleNavbar}>Dashboard</NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/todolist" onClick={toggleNavbar}>To Do</Link>
+              <NavLink to="/todolist" onClick={toggleNavbar}>To Do</NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/notebook" onClick={toggleNavbar}>Notes</Link>
+              <NavLink to="/notebook" onClick={toggleNavbar}>Notes</NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/about" onClick={toggleNavbar}>About</Link>
+              <NavLink to="/about" onClick={toggleNavbar}>About</NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/contact" onClick={toggleNavbar}>Contact</Link>
+              <NavLink to="/contact" onClick={toggleNavbar}>Contact</NavLink>
             </NavItem>
-            <NavItem className="b-none w-100">
-              <Link to="/user/signin" onClick={toggleNavbar}>
+            <NavItem className="w-100">
+              <Link to="/user/signin" className="b-none p-0" onClick={toggleNavbar}>
                 <Button size="lg" color="primary l-10" className="d-block m-auto w-100 text-uppercase">
                   Sign In
                 </Button>

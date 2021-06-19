@@ -218,19 +218,21 @@ a {
     backdrop-filter: blur(5px);
     .nav-item {
       font-size: 18px;
-      padding: 12px;
-      padding-bottom: 6px;
+      padding-bottom: 4px;
       color: inherit;
+      margin: 0 0 12px 0;
       text-align: center;
-      border-bottom: 2px solid transparent;
-      transition: border .3s ease-in;
       text-transform: uppercase;
-      &:hover {
-        border-bottom: 2px solid text-color($color-bg1);
-      }
       a {
+        padding: 8px;
         text-decoration: none;
         color: inherit;
+        border-bottom: 2px solid transparent;
+        transition: border .3s ease-in;
+        &.active,
+        &:hover {
+          border-bottom: 2px solid text-color($color-bg1);
+        }
       }
     }
     ul.navbar-nav {

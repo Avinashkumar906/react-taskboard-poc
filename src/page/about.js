@@ -1,15 +1,13 @@
 import React from 'react'
-import { Container, Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 
 const About = () => {
   return (
-    <Container>
-      <Row className="h-100 m-0 justify-content-center align-items-center">
-        <Col md="8" lg="5" className="p-0">
-          About us
-        </Col>
-      </Row>
-    </Container>
+    <Row className="h-100 m-0 justify-content-center align-items-center overflowY">
+      <Col md="10" lg="8" className="bg-ternary p-4 m-4">
+        hi
+      </Col>
+    </Row>
   )
 }
 

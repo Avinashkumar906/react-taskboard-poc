@@ -50,6 +50,7 @@ const Contact = (props) => {
           err => {
             console.log(err);
             props.hideLoader()
+            props.showToast(new Object({title:"Error", body:"Some error occured."}))
           }
         )
       }
