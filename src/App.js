@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App.scss';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { Container } from 'reactstrap';
+import { connect } from 'react-redux';
 
 import Notebook from './components/taskBoard/taskboard';
 import Header from './components/navBar/navbar';
@@ -9,11 +10,12 @@ import Todos from "./components/toDos/toDos";
 import Home from './page/home';
 import Dashboard from './page/dashboard';
 import axios from './http/axios';
-import { connect } from 'react-redux';
 import { addUser } from './store/action/action';
 import Spinner from './components/misc/spinner';
 import Toast from "./components/misc/toast";
 import WithProtectedRoute from './components/hoc/withProtectedRoute';
+import Contact from './page/contact';
+import About from './page/about';
 
 
 function App(props) {
@@ -43,13 +45,16 @@ function App(props) {
         </Container>
         <Container fluid className="contentBody p-0">
           <Switch>
+            {/* Public routin */}
             <Route path="/home" component={Home} />
             <Route path="/user" component={Home} />
-
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            {/* Private routing */}
             <WithProtectedRoute path="/dashboard" component={Dashboard}/>
             <WithProtectedRoute path="/notebook" component={Notebook}/>
             <WithProtectedRoute path="/todolist" component={Todos}/>
-            
+            {/* 404 redirect to home */}
             <Route path="/" exact render={() => <Redirect to="/home" /> } />
           </Switch>
         </Container>

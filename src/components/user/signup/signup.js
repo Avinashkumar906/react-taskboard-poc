@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import axios from '../../../http/axios';
 
-const Signup = (props) => {
+const Signup = () => {
 
   const history = useHistory()
   
