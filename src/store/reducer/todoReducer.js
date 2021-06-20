@@ -27,6 +27,8 @@ const reducer = (state = [], action) =>{
     case ACTIONCONST.DELETE_TODO:{
       return findandDelete(state, action.payload)
     }
+    case ACTIONCONST.CLEAN_TODO:
+      return [];
     default:
       return state;
   }

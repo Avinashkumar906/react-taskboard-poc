@@ -31,6 +31,8 @@ const reducer = (state = [], action) =>{
       return findAndUpdate(state, action.payload, action.type);
     case ACTIONCONST.DELETE_TASKBOARD:
       return findAndUpdate(state, action.payload, action.type);
+    case ACTIONCONST.CLEAN_TASKBOARD:
+      return [];
     default:
       return state;
   }

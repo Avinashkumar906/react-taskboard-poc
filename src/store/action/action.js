@@ -20,6 +20,10 @@ export function deleteTaskboard(data){
   return {type: ACTIONCONST.DELETE_TASKBOARD, payload: data};
 }
 
+export function cleanTaskboard(){ 
+  return {type: ACTIONCONST.CLEAN_TASKBOARD};
+}
+
 export function addTodoList(data){ 
   return {type: ACTIONCONST.ADD_TODO_LIST, payload: data};
 }
@@ -34,6 +38,10 @@ export function addTodo(data){
 
 export function deleteTodo(data){ 
   return {type: ACTIONCONST.DELETE_TODO, payload: data};
+}
+
+export function cleanTodo(){ 
+  return {type: ACTIONCONST.CLEAN_TODO};
 }
 
 export function showLoader(){ 

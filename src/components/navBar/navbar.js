@@ -5,13 +5,17 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import { Link, NavLink } from 'react-router-dom'
 import WithTooltip from '../hoc/withTooltip'
 import { connect } from 'react-redux';
-import { removeUser } from '../../store/action/action';
+import { cleanTaskboard, cleanTodo, removeUser } from '../../store/action/action';
 
 
 const Header = (props) => {
 
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
+
+  const logoutHandler = () => {
+    props.logoutHandler()
+  }
   
   return (
     <Navbar color="dark" dark>
@@ -22,7 +26,7 @@ const Header = (props) => {
         <div className="navbarMenuIcon" >
           {
             props.user.token ?
-            <WithTooltip><span className="m-2" onClick={props.logoutHandler} data-tip="Sign Out">
+            <WithTooltip><span className="m-2" onClick={logoutHandler} data-tip="Sign Out">
               <AiOutlinePoweroff />
             </span></WithTooltip> : null
           }
@@ -71,7 +75,12 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logoutHandler: () => dispatch(removeUser())
+    logoutHandler: () => {
+      dispatch(removeUser())
+      dispatch(cleanTaskboard())
+      dispatch(cleanTodo())
+    }
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
