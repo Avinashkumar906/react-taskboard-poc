@@ -32,7 +32,11 @@ const TodoColumn = (props) => {
         <span className="text-uppercase h5 m-0">{props.title}</span>
       </CardHeader>
       <CardBody className="overflowY" onDrop={e => handleDrop(e)} onDragOver={e => handleDragOver(e)}>
-          {props.cards.map((data) => <TodosCard data={data} onDelete={handleDelete} key={data._id} />)}
+          {
+            props.cards.length 
+            ? props.cards.map((data) => <TodosCard data={data} onDelete={handleDelete} key={data._id} />)
+            : <TodosCard data={false} />
+          }
       </CardBody>
     </Card>
   )

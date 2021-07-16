@@ -39,14 +39,21 @@ const Notebook = (props) => {
 
   const saveTaskBoardHandler = () => {
     let element = editorRef.current.editor.getContents();
-      if (element === ''  || element === undefined || element === null) {
-        alert('Please write some text!');
-      } else {
+      if (currentTask && props.tasksboard.length) {
         props.updateTaskBoard({...currentTask, body: element})
+      } else {
+        props.setContent(element)
+        props.toggle()
       }
   }
 
+  const modalController = () => {
+    props.setContent(null)
+    props.toggle()
+  }
+
   const deleteTaskboardHandler = () => {
+    if(!props.tasksboard.length) return;
     const result = window.confirm('Are you sure you want to delete?');
     if(currentTask && result){
       const index = props.tasksboard.findIndex((item)=>item._id === currentTask._id)
@@ -65,18 +72,22 @@ const Notebook = (props) => {
         <div className="text-end w-100">
           <ButtonGroup className="w-auto mr-auto">
             <WithTooltip>
-              <Button color="ternary" className="border-radius-0" data-tip="Add" onClick={props.toggle}>
-                <RiAddCircleFill ></RiAddCircleFill>
+              <Button color="ternary" className="border-radius-0" data-tip="Add" onClick={modalController}>
+                <RiAddCircleFill />
               </Button>
               <Button color="ternary" className="border-radius-0" data-tip="Refresh" onClick={fetchTaskboardHandler}>
-                <RiRefreshFill></RiRefreshFill>
+                <RiRefreshFill />
               </Button>
             </WithTooltip>
           </ButtonGroup>
         </div>
         <div className="heightFixTaskList">
           <ListGroup>
-            {props.tasksboard.map((item) => <ListGroupItem key={item._id}><Board clicked={clickTaskHandler} selected={currentTask} data={item}></Board></ListGroupItem>)}
+            {
+              props.tasksboard.length 
+              ? props.tasksboard.map((item) => <ListGroupItem key={item._id}><Board clicked={clickTaskHandler} selected={currentTask} data={item} /></ListGroupItem>)
+              : <Board data={false} />
+            }
           </ListGroup>
         </div>
       </Col>
@@ -85,10 +96,10 @@ const Notebook = (props) => {
           <ButtonGroup className="w-auto mr-auto">
             <WithTooltip>
               <Button color="ternary" className="border-radius-0" data-tip="Save" onClick={saveTaskBoardHandler}>
-                <RiSaveFill></RiSaveFill>
+                <RiSaveFill />
               </Button>
               <Button color="ternary" className="border-radius-0" data-tip="Delete" onClick={deleteTaskboardHandler}>
-                <RiDeleteBin2Line></RiDeleteBin2Line>
+                <RiDeleteBin2Line />
               </Button>
             </WithTooltip>
           </ButtonGroup>

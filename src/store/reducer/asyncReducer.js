@@ -43,12 +43,12 @@ export function updateTasksboardAsync(note) {
     axios.patch('taskboard', note).then(
       response => {
         dispatch(ACTION.updateTaskboard(response.data))
-        dispatch(ACTION.showToast(new Object({title:"Update",body:"Board Updated !"}))) 
+        dispatch(ACTION.showToast({title:"Update",body:"Board Updated !"}));
       }
     ).catch(
       err=>{
         console.log(err)
-        dispatch(ACTION.showToast(new Object({title:"Error",body:"Error occured !"}))) 
+        dispatch(ACTION.showToast({title:"Error",body:"Error occured !"})); 
       }
     )
   };
@@ -58,12 +58,12 @@ export function deleteTasksboardAsync(note) {
     axios.delete(`taskboard?taskboardId=${note._id}`).then(
       response => {
         dispatch(ACTION.deleteTaskboard(note))
-        dispatch(ACTION.showToast(new Object({title:"Update",body:"Board Updated !"}))) 
+        dispatch(ACTION.showToast({title:"Update",body:"Board Updated !"}));
       }
     ).catch(
       err=>{
         console.log(err)
-        dispatch(ACTION.showToast(new Object({title:"Error",body:"Error occured !"}))) 
+        dispatch(ACTION.showToast({title:"Error",body:"Error occured !"}));
       }
     )
   };
@@ -76,13 +76,13 @@ export function fetchTodoAsync() {
       response => {
         dispatch(ACTION.hideLoader())
         dispatch(ACTION.addTodoList(response.data));
-        dispatch(ACTION.showToast(new Object({title:"Update",body:"Board Updated !"}))) 
+        dispatch(ACTION.showToast({title:"Update",body:"Board Updated !"}));
       }
     ).catch(
       err=>{
         console.log(err)
         dispatch(ACTION.hideLoader())
-        dispatch(ACTION.showToast(new Object({title:"Error",body:"Error occured !"}))) 
+        dispatch(ACTION.showToast({title:"Error",body:"Error occured !"}));
       }
     )
   };
@@ -113,13 +113,13 @@ export function updateTodoAsync(data) {
     dispatch(ACTION.updateTodo(task)) 
     axios.patch('task', task).then(
       response => {
-        dispatch(ACTION.showToast(new Object({title:"update",body:"Board Updated !"}))) 
+        dispatch(ACTION.showToast({title:"update",body:"Board Updated !"}));
       }
     ).catch(
       err=>{
         console.log(err);
         dispatch(fetchTodoAsync())
-        dispatch(ACTION.showToast(new Object({title:"Error",body:"Error occured !"})))
+        dispatch(ACTION.showToast({title:"Error",body:"Error occured !"}));
       }
     )
   };
@@ -130,13 +130,13 @@ export function deleteTodoAsync(data) {
     dispatch(ACTION.deleteTodo(data));
     axios.delete(`task?taskId=${data._id}`).then(
       response => {
-        dispatch(ACTION.showToast(new Object({title:"Update",body:"Task Delete Success!"}))) 
+        dispatch(ACTION.showToast({title:"Update",body:"Task Delete Success!"}));
       }
     ).catch(
       err=>{
         console.log(err)
         dispatch(fetchTodoAsync())
-        dispatch(ACTION.showToast(new Object({title:"Update",body:"Unable to delete task!"}))) 
+        dispatch(ACTION.showToast({title:"Update",body:"Unable to delete task!"}));
       }
     )
   };

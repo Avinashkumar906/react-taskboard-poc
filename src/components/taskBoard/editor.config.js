@@ -1,5 +1,5 @@
 const editorOption = {
-  mode: "balloon",
+  mode: "classic",
   fontSize : [
       8, 10, 12, 14, 16, 18, 20, 24, 28, 36
   ],
@@ -19,12 +19,6 @@ const editorOption = {
     ['-right', ':i-More Misc-default.more_vertical', 'fullScreen', 'showBlocks', 'codeView', 'preview', 'print', 'save', 'template'],
     ['-right', ':r-More Rich-default.more_plus', 'table','list' , 'math', 'imageGallery'],
     ['-right', 'image', 'video', 'audio', 'link'],
-    // ["","template","math"]
-    // ["font","fontSize","formatBlock"],
-    // ["blockquote","bold","underline","italic","strike","subscript","superscript"],
-    // ["fontColor","hiliteColor","textStyle","removeFormat","outdent","indent","align","horizontalRule"],
-    // ["list","table","link","image","video","audio"],
-    // ["fullScreen","showBlocks","codeView","preview","print"],
   ]
 }
 

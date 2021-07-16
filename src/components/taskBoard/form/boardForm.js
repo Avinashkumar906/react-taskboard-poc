@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { addTasksboardAsync } from '../../../store/reducer/asyncReducer';
 
 function BoardForm(props) {
-
   const formik = useFormik({
       initialValues: {
         title: '',
         description: '',
+        body: props.content || '**data not encrypted, please don\'t save any confidential information**',
       },
       validate: values => {
         const errors = {};
@@ -31,7 +31,7 @@ function BoardForm(props) {
 
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <ModalHeader>Modal title</ModalHeader>
+      <ModalHeader>Notes</ModalHeader>
       <ModalBody>
           <FormGroup className="mb-2"> 
             <Label for="title">Enter title</Label>

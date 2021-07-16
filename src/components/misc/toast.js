@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import { Toast, ToastBody, ToastHeader, Badge } from 'reactstrap';
+import { Toast, ToastBody, Badge } from 'reactstrap';
 import * as ACTION from '../../store/action/action'
 
 const ToastComp = (props) => {
