@@ -27,9 +27,6 @@ function TodosCard(props) {
           <Row className={visible ? 'hidden' : 'm-0 visible'}>
             <Col sm="12">
               <div className="h4 p-1 text-center">{data.title}</div>
-              <span>
-                {JSON.stringify(data)}
-              </span>
             </Col>
             <Col sm="12" className="text-center card-footer p-0">
               <ButtonGroup> 

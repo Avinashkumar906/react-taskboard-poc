@@ -12,7 +12,7 @@ const Dashboard = (props) => {
           <Row className="">
             <Col>
               <div className="h2">
-                Welcome <strong>Avinash</strong>
+                {/*Welcome <strong>Avinash</strong>*/}
               </div>
             </Col>
           </Row>
@@ -30,7 +30,7 @@ const Dashboard = (props) => {
         <div className="gridItem item3 bg-primary">
           <Row className="h-100 w-100">
             <div sm="12" className="h2 text-end align-self-end">
-             5 task from last 7 days.
+             {/*5 task from last 7 days.*/}
             </div>
           </Row>
         </div>
