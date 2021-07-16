@@ -93,7 +93,7 @@ export function addTodoAsync(task) {
     dispatch(ACTION.showLoader())
     axios.post('task', task).then(
       response => {
-        dispatch(ACTION.addTodo(task))
+        dispatch(ACTION.addTodo(response.data))
         dispatch(ACTION.hideLoader())
       }
     ).catch(

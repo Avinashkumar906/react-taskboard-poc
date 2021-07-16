@@ -42,7 +42,7 @@ const ToDos = (props) => {
         </ButtonGroup>
       </Col>
       <div className="col-md-4 content">
-        <TodoColumn title="BACKLOG" cards={filterHandler(props.todos, "BACKLOG")} />
+        <TodoColumn key="backlog" title="BACKLOG" cards={filterHandler(props.todos, "BACKLOG")} />
       </div>
       <div className="col-md-4 content">
         <TodoColumn title="PROGRESS" cards={filterHandler(props.todos, "PROGRESS")} />
