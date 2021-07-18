@@ -79,7 +79,9 @@ export function refresh() {
         dispatch(ACTION.addTaskboard(notes.data));
         dispatch(ACTION.showToast({title:"Refresh",body:"Dashboard refreshed !"}));
       }
-    )
+    ).catch(
+      err => console.log(err)
+    );
   }
 }
 
