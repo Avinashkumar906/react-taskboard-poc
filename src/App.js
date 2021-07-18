@@ -10,7 +10,7 @@ import Todos from "./components/toDos/toDos";
 import Home from './page/home';
 import Dashboard from './page/dashboard';
 import axios from './http/axios';
-import { addUser } from './store/action/action';
+import {addUser, removeUser} from './store/action/action';
 import Spinner from './components/misc/spinner';
 import Toast from "./components/misc/toast";
 import WithProtectedRoute from './components/hoc/withProtectedRoute';
@@ -28,12 +28,10 @@ function App(props) {
       .then( res => props.loginHandler(res.data) )
       .catch( err => {
         console.log(err);
+        props.logoutHandler();
       })
     } else {
-      console.log('Not login!', token)  
-    }
-    return () => {
-      console.log("App.js cleanup")
+      props.logoutHandler()
     }
   }, [])
 
@@ -72,6 +70,7 @@ function App(props) {
 const mapDispatchToProps = dispatch => {
   return {
     loginHandler: (userdata) => dispatch(addUser(userdata)),
+    logoutHandler: () => dispatch(removeUser())
   }
 }
 
