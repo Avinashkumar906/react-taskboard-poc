@@ -69,6 +69,20 @@ export function deleteTasksboardAsync(note) {
   };
 }
 
+export function refresh() {
+  return dispatch => {
+    let tasks = axios.get('tasks');
+    let notes = axios.get('tasksboard');
+    Promise.all([tasks,notes]).then(
+      ([tasks,notes]) => {
+        dispatch(ACTION.addTodoList(tasks.data));
+        dispatch(ACTION.addTaskboard(notes.data));
+        dispatch(ACTION.showToast({title:"Refresh",body:"Dashboard refreshed !"}));
+      }
+    )
+  }
+}
+
 export function fetchTodoAsync() {
   return dispatch => {
     dispatch(ACTION.showLoader())

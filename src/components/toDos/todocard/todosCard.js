@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, ButtonGroup, Button } from 'reactstrap';
 import { BiCalendar } from "react-icons/bi";
-import { RiMailOpenLine,RiCloseFill,RiDragMove2Line,RiDeleteBin6Line } from "react-icons/ri";
+import { RiCheckboxCircleFill,RiMailOpenLine,RiCloseFill,RiDragMove2Line,RiDeleteBin6Line } from "react-icons/ri";
+import { TiWarning } from 'react-icons/ti';
 import WithTooltip from '../../hoc/withTooltip';
 
 function TodosCard(props) {
@@ -19,6 +20,32 @@ function TodosCard(props) {
     setVisible(!visible);
   }
 
+  const getStatus = (e) => {
+    let currentDate = new Date();
+    let currentTime = currentDate.getTime();
+    let toDoStartTime = new Date(data.startTime).getTime();
+    let toDoEndTime = new Date(data.endTime).getTime();
+    let toDoStartDate = new Date(data.startDate);
+    let toDoEndDate = new Date(data.endDate);
+    switch (e) {
+      case "END_DATE_ELAPSED":{
+        return currentDate - toDoEndDate > 0
+      }
+      case "START_DATE_ELAPSED":{
+        return currentDate - toDoStartDate > 0
+      }
+      case "START_TIME_ELAPSED":{
+        return currentTime - toDoStartTime > 0
+      }
+      case "END_TIME_ELAPSED":{
+        return currentTime - toDoEndTime > 0
+      }
+      default:{
+        return false
+      }
+    }
+  }
+
   return (
     <div>
       {
@@ -26,7 +53,16 @@ function TodosCard(props) {
         <Card className="mb-2 c-initial">
           <Row className={visible ? 'hidden' : 'm-0 visible'}>
             <Col sm="12">
-              <div className="h4 p-1 text-center">{data.title}</div>
+              <div className="h4 p-1 text-center mb-0 text-capitalize">{data.title}</div>
+              <span>
+                {data.progress === "BACKLOG" && getStatus("START_DATE_ELAPSED") && <p className='text-danger'><TiWarning /> <span>Task start date elapsed.</span></p>}
+                {data.progress === "PROGRESS" && getStatus("END_DATE_ELAPSED") && <p className='text-danger'><TiWarning /> <span>Task end date elapsed.</span></p>}
+                {data.progress === "COMPLETED" && <p className='text-success'><RiCheckboxCircleFill /> <span>Task Completed.</span></p>}
+              </span>
+              <span>
+                Created on : {data.created.split('T')[0]},
+                Priority: {data.priority}
+              </span>
             </Col>
             <Col sm="12" className="text-center card-footer p-0">
               <ButtonGroup> 
@@ -45,14 +81,18 @@ function TodosCard(props) {
             </Col>
           </Row>
           <Row className={!visible ? 'hidden' : 'm-0 visible'}>
-            <div className="text-end" onClick={handleView}>
-              <RiCloseFill/>
+            <div className="text-end" >
+              <span className="cursor-pointer p-2 px-0" onClick={handleView}>
+                <RiCloseFill />
+              </span>
             </div>
-            <div className="h5 mb-1">{data.description}</div>
+            <div className="h5 mb-1 text-center">{data.description}</div>
             <Col sm="12" className="">
-              <div className="h6 calender text-end">
+              <div className="h6 calender text-center">
                 <BiCalendar className="m-2 ml-0" />
-                <span>{data.startDate}</span>
+                {data.progress === 'BACKLOG' && <span>Start Date: {data.startDate}</span>}
+                {data.progress === 'PROGRESS' && <span>End Date: {data.endDate}</span>}
+                {data.progress === 'COMPLETED' && <span>Task Completed</span>}
               </div>
             </Col>
           </Row>

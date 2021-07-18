@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux';
-import { Button, Row, Col, ButtonGroup, ListGroup, ListGroupItem } from 'reactstrap';
+import {Button, Row, Col, ButtonGroup, ListGroup, ListGroupItem, Input} from 'reactstrap';
 import SunEditor from 'suneditor-react';
-import { RiAddCircleFill, RiRefreshFill, RiSaveFill, RiDeleteBin2Line} from 'react-icons/ri';
+import { RiSearchEyeFill, RiAddCircleFill, RiRefreshFill, RiSaveFill, RiDeleteBin2Line} from 'react-icons/ri';
+import {BiSort} from "react-icons/bi";
 
 import editorConfig from './editor.config'
 import { deleteTasksboardAsync, fetchTasksboardAsync, updateTasksboardAsync } from '../../store/reducer/asyncReducer';
@@ -14,6 +15,9 @@ import BoardForm from './form/boardForm';
 const Notebook = (props) => {
 
   const editorRef = useRef(null);
+  const [searchToggle, setSearchToggle] = useState(false);
+  const [searchString, setSearchString] = useState('');
+  const [sort,setSort] = useState(1);
   const [currentTask, setCurrentTask] = useState(null)
   const [updatedTask, setUpdatedTask] = useState(null)
 
@@ -52,6 +56,37 @@ const Notebook = (props) => {
     props.toggle()
   }
 
+  const searchHandler = () => {
+    setSearchToggle(!searchToggle);
+  }
+
+  const searchInputHandler = (target) => {
+    setSearchString(target.value)
+  }
+
+  const sortHandler = () => {
+    setSort(sort*(-1));
+  }
+
+  const getTaskList = () => {
+    let arr;
+    if(searchToggle && searchString){
+      arr = props.tasksboard.filter((e) =>
+        e.title.toLowerCase().includes(searchString.toLowerCase())
+      ).sort((a,b) =>
+        (new Date(a.created) - new Date(b.created)) * sort
+      );
+    } else {
+      arr = props.tasksboard.sort((a,b) =>
+        (new Date(a.created) - new Date(b.created)) * sort
+      );
+    }
+    console.log(arr)
+    return arr.map((item) =>
+      <ListGroupItem key={item._id}><Board clicked={clickTaskHandler} selected={currentTask} data={item} /></ListGroupItem>
+    )
+  }
+
   const deleteTaskboardHandler = () => {
     if(!props.tasksboard.length) return;
     const result = window.confirm('Are you sure you want to delete?');
@@ -72,6 +107,22 @@ const Notebook = (props) => {
         <div className="text-end w-100">
           <ButtonGroup className="w-auto mr-auto">
             <WithTooltip>
+              <div className="d-flex">
+                {
+                  searchToggle &&
+                  <Input bsSize='sm'
+                         style={{'margin':'2px'}}
+                         value={searchString}
+                         placeholder="Search"
+                         onChange={(e)=> searchInputHandler(e.target)}/>
+                }
+              </div>
+              <Button color="ternary" className="border-radius-0" data-tip="Search" onClick={searchHandler}>
+                <RiSearchEyeFill />
+              </Button>
+              <Button color="ternary br-0" data-tip="sort" onClick={sortHandler}>
+                <BiSort />
+              </Button>
               <Button color="ternary" className="border-radius-0" data-tip="Add" onClick={modalController}>
                 <RiAddCircleFill />
               </Button>
@@ -84,9 +135,7 @@ const Notebook = (props) => {
         <div className="heightFixTaskList">
           <ListGroup>
             {
-              props.tasksboard.length 
-              ? props.tasksboard.map((item) => <ListGroupItem key={item._id}><Board clicked={clickTaskHandler} selected={currentTask} data={item} /></ListGroupItem>)
-              : <Board data={false} />
+              getTaskList().length ? getTaskList() : <Board data={false} />
             }
           </ListGroup>
         </div>

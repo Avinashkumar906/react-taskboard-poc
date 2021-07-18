@@ -15,16 +15,12 @@ function Board(props) {
         <div className="h5">
           {props.data.title}
         </div>
-        {/* <div className="card-body-info h6">
-          {props.data.description}
-        </div> */}
       </CardBody>
     </Card> :
     <Card className="" >
       <CardBody>
         <div className="h5">
-          Notes not available <br/>
-          click "+" icon to add one.
+          Sorry!<br/>No data available
         </div>
       </CardBody>
     </Card>
