@@ -1,5 +1,5 @@
 const editorOption = {
-  mode: "classic",
+  mode: "balloon",
   fontSize : [
       8, 10, 12, 14, 16, 18, 20, 24, 28, 36
   ],
@@ -8,18 +8,28 @@ const editorOption = {
   height:'100%',
   minHeight : '100%',
   maxHeight: '100%',
+  videoFileInput: false,
+  imageFileInput: false,
+  imageGalleryUrl: "https://etyswjpn79.execute-api.ap-northeast-1.amazonaws.com/suneditor-demo",
   buttonList: [
-    ['save', 'undo', 'redo'],
-    [':p-More Paragraph-default.more_paragraph', 'font', 'fontSize', 'formatBlock', 'paragraphStyle', 'blockquote'],
-    ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-    ['fontColor', 'hiliteColor', 'textStyle'],
-    ['removeFormat'],
-    ['outdent', 'indent'],
-    ['align', 'horizontalRule', 'lineHeight'],
-    ['-right', ':i-More Misc-default.more_vertical', 'fullScreen', 'showBlocks', 'codeView', 'preview', 'print', 'save', 'template'],
-    ['-right', ':r-More Rich-default.more_plus', 'table','list' , 'math', 'imageGallery'],
-    ['-right', 'image', 'video', 'audio', 'link'],
-  ]
+    ['undo', 'redo'],
+    ['font', 'fontSize', 'formatBlock'],
+    ['bold', 'underline', 'italic', 'strike'],
+    [ 'subscript', 'superscript'],['lineHeight'],
+    [ 'paragraphStyle', 'textStyle','blockquote', 'horizontalRule'],
+    ['fontColor', 'hiliteColor', 'removeFormat'],['outdent', 'indent', 'align' ],
+    ['table', 'list'],[ 'image', 'link', 'imageGallery', 'video', 'audio'],
+    ['fullScreen', 'showBlocks', 'codeView'],[ 'preview', 'print', 'template'],[ 'math']
+  ],
+  callBackSave : function (contents, isChanged) {
+    console.log('please click save button.')
+  }
 }
-
+export const toolbarButtons = {
+  fontOption:  [['undo', 'redo'],['font', 'fontSize', 'formatBlock'],[ 'paragraphStyle', 'textStyle','blockquote', 'horizontalRule']],
+  fontStyle: [['undo', 'redo'],['bold', 'underline', 'italic', 'strike'],[ 'subscript', 'superscript'],['lineHeight']],
+  fontFormat: [['undo', 'redo'],['fontColor', 'hiliteColor', 'removeFormat']['outdent', 'indent', 'align' ]],
+  additional: [['undo', 'redo'],['table', 'list'],[ 'image', 'link', 'imageGallery', 'video', 'audio']],
+  addOn: [['undo', 'redo'],['fullScreen', 'showBlocks', 'codeView'],[ 'preview', 'print', 'template'],[ 'math']],
+}
 export default editorOption;

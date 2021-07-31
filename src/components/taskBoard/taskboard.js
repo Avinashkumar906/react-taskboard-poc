@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux';
-import {Button, Row, Col, ButtonGroup, ListGroup, ListGroupItem, Input} from 'reactstrap';
+import { Button, Row, Col, ButtonGroup, ListGroup, ListGroupItem, Input } from 'reactstrap';
 import SunEditor from 'suneditor-react';
-import { RiSearchEyeFill, RiAddCircleFill, RiRefreshFill, RiSaveFill, RiDeleteBin2Line} from 'react-icons/ri';
-import {BiSort} from "react-icons/bi";
+import { RiSearchEyeFill, RiAddCircleFill, RiRefreshFill, RiSaveFill, RiDeleteBin2Line } from 'react-icons/ri';
+import { BiSort } from "react-icons/bi";
 
-import editorConfig from './editor.config'
+import editorConfig, {toolbarButtons} from './editor.config'
 import { deleteTasksboardAsync, fetchTasksboardAsync, updateTasksboardAsync } from '../../store/reducer/asyncReducer';
 import Board from './board/board'
 import WithModal from '../hoc/withModal';
@@ -18,16 +18,16 @@ const Notebook = (props) => {
   const [searchToggle, setSearchToggle] = useState(false);
   const [searchString, setSearchString] = useState('');
   const [sort,setSort] = useState(1);
-  const [currentTask, setCurrentTask] = useState(null)
-  const [updatedTask, setUpdatedTask] = useState(null)
+  const [currentTask, setCurrentTask] = useState(null);
+  const [updatedTask, setUpdatedTask] = useState(null);
 
   useEffect(() => {
     if(!props.tasksboard.length){
       props.fetchTaskboard()
-    } else if (updatedTask) {
-      clickTaskHandler(updatedTask)
     } else {
-      clickTaskHandler(props.tasksboard[0])
+      updatedTask ?
+        clickTaskHandler(updatedTask) :
+        clickTaskHandler(props.tasksboard[0]);
     }
     return () => null
   }, [props.tasksboard.length])
@@ -81,7 +81,6 @@ const Notebook = (props) => {
         (new Date(a.created) - new Date(b.created)) * sort
       );
     }
-    console.log(arr)
     return arr.map((item) =>
       <ListGroupItem key={item._id}><Board clicked={clickTaskHandler} selected={currentTask} data={item} /></ListGroupItem>
     )
@@ -153,7 +152,7 @@ const Notebook = (props) => {
             </WithTooltip>
           </ButtonGroup>
         </div>
-        <SunEditor enable={true} disable={false} show={true} showToolbar={true} setOptions={editorConfig} ref={editorRef}/>
+        <SunEditor callBackSave="alert('hi')" enable={true} disable={false} show={true} showToolbar={true} setOptions={editorConfig} ref={editorRef}/>
       </Col>
     </Row>
   )
@@ -177,3 +176,4 @@ const mapDispatchToProps = dispatch => {
 const reduxComponent = connect(mapStateToProps, mapDispatchToProps)(Notebook)
 
 export default WithModal(reduxComponent, BoardForm);
+// export saveTaskBoardHandler;
