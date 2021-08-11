@@ -51,13 +51,10 @@ const Contact = (props) => {
     onSubmit: values => {
       if(formik.dirty && formik.isValid){
         props.showLoader()
-        const feedback = getFeedbackMail(values);
-        const thankyou = getThankyouMail(values);
-        axios.post('mailservice', feedback).then(
+        axios.post('bulkmailservice', [getFeedbackMail(values),getThankyouMail(values)]).then(
           res => {
             formik.resetForm()
             props.hideLoader()
-            axios.post('mailservice',thankyou);
             props.showToast(new Object({title:"Update", body:"Thanks for writing to us."}))
           }
         )
