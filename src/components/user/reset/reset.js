@@ -68,7 +68,7 @@ const Reset = (props) => {
   return (
     // <Row className="h-100 m-0 justify-content-end align-items-center">
     //   <Col md="6" lg="5" className="p-0">
-        <div className="bg-ternary p-5 m-4 containerHome">
+        <div className="p-5 m-4 containerHome">
           {/* <Form onSubmit={(e)=>formik.dirty && formik.isValid ? formik.handleSubmit : e.preventDefault()}> */}
           <Form onSubmit={formik.handleSubmit}>
             <div className="h2 mb-3 text-left">Reset Password</div>

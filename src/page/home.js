@@ -4,13 +4,14 @@ import { Col, Row, Button } from 'reactstrap';
 import SignIn from '../components/user/login/login';
 import SignUp from "../components/user/signup/signup";
 import Reset from "../components/user/reset/reset";
+import homePNG from "../assets/img/home.svg";
 
 function Home(props) {
 
   let { path } = useRouteMatch()
 
   const home  = (
-    <div className="bg-ternary m-4 p-5 containerHome">
+    <div className="m-4 p-5 containerHome">
       <div className="h3 mb-2">
         Welcome to FORTY app.
       </div>
@@ -33,8 +34,11 @@ function Home(props) {
   )
 
   return (
-    <Row className="h-100 m-0 justify-content-end align-items-center">
-      <Col md="6" lg="5" className="p-0">
+    <Row className="h-100 m-0 align-items-center">
+      <Col md="6" lg="6" className="p-0 d-md-block d-none">
+        <img src={homePNG} alt="home logo" width="100%" style={{'max-height':'420px','height':'100%'}}/>
+      </Col>
+      <Col md="6" lg="6" className="p-0">
         <Route path={path} exact render={()=>home} />
         <Route path={`${path}/signin`} component={SignIn} />
         <Route path={`${path}/signup`} component={SignUp} />

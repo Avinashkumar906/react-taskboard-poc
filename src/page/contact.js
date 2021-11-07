@@ -53,16 +53,16 @@ const Contact = (props) => {
         props.showLoader()
         axios.post('bulkmailservice', [getFeedbackMail(values),getThankyouMail(values)]).then(
           res => {
-            formik.resetForm()
-            props.hideLoader()
-            props.showToast(new Object({title:"Update", body:"Thanks for writing to us."}))
+            formik.resetForm();
+            props.hideLoader();
+            props.showToast(new Object({title:"Update", body:"Thanks for writing to us."}));
           }
         )
         .catch(
           err => {
             console.log(err);
-            props.hideLoader()
-            props.showToast(new Object({title:"Error", body:"Some error occured."}))
+            props.hideLoader();
+            props.showToast(new Object({title:"Error", body:"Some error occured."}));
           }
         )
       }
